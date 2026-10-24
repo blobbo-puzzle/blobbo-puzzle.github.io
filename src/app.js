@@ -64,7 +64,10 @@ function fillRoomGrid(){const grid=$('room-grid');grid.replaceChildren();activeL
 function loadLevel(index){cancelAnimation();currentIndex=Math.max(0,Math.min(activeLevels.length-1,index));level=activeLevels[currentIndex];state=createState(level);history=[];testMode=false;mode='play';saved[collection+'Current']=currentIndex;saved[collection+'RoomId']=level.id;persist();renderMode();board.focus({preventScroll:true});}
 function renderMode(){
  $('collection').value=collection;
- const edit=mode==='edit';
+ const edit=mode==='edit',wasEditing=document.body.classList.contains('creating');
+ document.body.classList.toggle('creating',edit);
+ $('menu-toggle').hidden=edit;$('close-menu').hidden=edit;
+ if(edit)showMenu(true);else if(wasEditing)hideMenu();
  $('game-window').classList.toggle('editing',edit);
  $('play-tab').setAttribute('aria-selected',!edit);$('editor-tab').setAttribute('aria-selected',edit);
  $('play-sidebar').hidden=edit;$('room-picker').hidden=edit||testMode;$('editor-sidebar').hidden=!edit;
@@ -160,7 +163,7 @@ function animateTurn(before,frames,action){
 function undo(){cancelAnimation();if(mode==='edit'){undoEdit();return;}if(history.length){state=history.pop();playSound('undo');render();}}
 function restart(){cancelAnimation();playSound('restart');state=createState(level);history=[];render();board.focus({preventScroll:true});}
 function nextRoom(){if(currentIndex===activeLevels.length-1)showRooms();else loadLevel(currentIndex+1);}
-function enterEditor(){cancelAnimation();mode='edit';testMode=false;renderMode();showMenu(true);}
+function enterEditor(){cancelAnimation();mode='edit';testMode=false;renderMode();}
 function pushEdit(){editHistory.push(structuredClone(draft));if(editHistory.length>100)editHistory.shift();}
 function saveDraft(){saved.draft=structuredClone(draft);persist();}
 function undoEdit(){if(editHistory.length){draft=editHistory.pop();saveDraft();renderMode();}}
@@ -187,7 +190,7 @@ board.addEventListener('pointercancel',()=>{if(painting){painting=false;saveDraf
 board.addEventListener('pointerleave',()=>{hover=null;if(mode==='edit')render();});
 board.addEventListener('contextmenu',e=>{if(mode==='edit')e.preventDefault();});
 function checkDraft(){draft.name=$('room-title').value.trim()||'Untitled room';const result=validateLevel(draft);if(!result.valid){toast(result.errors.slice(0,3).join(' '));return false;}return true;}
-function testDraft(){if(!checkDraft())return;hideMenu();saveDraft();level=structuredClone(draft);state=createState(level);history=[];testMode=true;mode='play';renderMode();board.focus({preventScroll:true});}
+function testDraft(){if(!checkDraft())return;saveDraft();level=structuredClone(draft);state=createState(level);history=[];testMode=true;mode='play';renderMode();board.focus({preventScroll:true});}
 function saveRoom(){if(!checkDraft())return;saveDraft();const i=saved.rooms.findIndex(r=>r.id===draft.id);if(i>=0)saved.rooms[i]=structuredClone(draft);else saved.rooms.push(structuredClone(draft));persist();toast(`“${draft.name}” saved in My rooms.`);}
 function exportRoom(){if(!checkDraft())return;const payload={format:'blobbo-browser',version:1,level:structuredClone(draft)};const url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=(draft.name.toLowerCase().replace(/[^a-z0-9]+/g,'-')||'room')+'.blobbo.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('Room exported. Keep this file to share or back it up.');}
 async function importRoom(file){try{if(file.size>200000)throw new Error('Room file is too large.');const parsed=JSON.parse(await file.text());const incoming=parsed.level||parsed;const validation=validateLevel(incoming);if(!validation.valid)throw new Error(validation.errors.slice(0,3).join(' '));pushEdit();draft={id:'custom-'+Date.now(),name:String(incoming.name||'Imported room').slice(0,60),chapter:'custom',description:String(incoming.description||'An imported room.').slice(0,300),hint:String(incoming.hint||'').slice(0,500),rows:incoming.rows};if(typeof incoming.solution==='string'&&incoming.solution.length<20000&&/^[UDLRWX]*$/.test(incoming.solution)){let replay=createState(draft);for(const action of incoming.solution)replay=step(replay,action);if(replay.status==='won'){draft.solution=incoming.solution;if(incoming.generated&&incoming.generator&&typeof incoming.generator.seed==='string'){draft.generated=true;draft.generator={seed:incoming.generator.seed.slice(0,80),version:1};}}}saveDraft();enterEditor();toast('Room imported. Try it with Test room.');}catch(error){toast('Could not import: '+error.message);}}
@@ -208,6 +211,8 @@ function showMenu(pin=false){
  $('game-menu').hidden=false;$('menu-toggle').setAttribute('aria-expanded','true');
 }
 function hideMenu(){
+ // The creator palette is a docked workspace, not a dismissible play menu.
+ if(mode==='edit')return;
  clearTimeout(menuCloseTimer);menuPinned=false;menuDismissed=$('menu-anchor').matches(':hover');
  if($('game-menu').contains(document.activeElement))board.focus({preventScroll:true});
  $('game-menu').hidden=true;$('menu-toggle').setAttribute('aria-expanded','false');
@@ -262,5 +267,5 @@ $('test-room').onclick=testDraft;$('save-room').onclick=saveRoom;$('export-room'
 $('import-file').addEventListener('change',e=>{if(e.target.files[0])importRoom(e.target.files[0]);e.target.value='';});
 $('generate').onclick=()=>{pushEdit();const seed=$('seed').value.trim()||String(Date.now());$('seed').value=seed;draft={...generateLevel(seed),id:'custom-'+Date.now(),chapter:'custom'};saveDraft();enterEditor();toast('A new solvable maze. Test it, change it, or save it.');};
 for(const button of document.querySelectorAll('[data-move]'))button.onclick=()=>move(button.dataset.move);
-window.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('dialog').open){e.preventDefault();if(document.fullscreenElement){toggleFullscreen();return;}if(!$('game-menu').hidden){hideMenu();$('menu-toggle').focus({preventScroll:true});}else{showMenu(true);$('close-menu').focus({preventScroll:true});}return;}if($('dialog').open||['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)||(e.key===' '&&['BUTTON','SUMMARY','A'].includes(e.target.tagName))||e.ctrlKey||e.metaKey||e.altKey)return;if((e.key==='Enter'||e.key==='Return')&&mode==='play'&&state.status==='won'&&!e.target.closest('button,a,summary,[contenteditable]')){e.preventDefault();if(!e.repeat){if(testMode)enterEditor();else nextRoom();}return;}if(e.key.toLowerCase()==='l'&&!e.target.closest('[contenteditable]')){e.preventDefault();if(!e.repeat)toggleFullscreen();return;}const actions={ArrowUp:'U',ArrowDown:'D',ArrowLeft:'L',ArrowRight:'R',w:'U',a:'L',s:'D',d:'R',' ':'W',x:'X'};const action=actions[e.key];if(action){e.preventDefault();if(e.repeat&&performance.now()-lastMove<105)return;lastMove=performance.now();move(action,e.repeat);}else if(e.key.toLowerCase()==='z'){e.preventDefault();undo();}else if(e.key.toLowerCase()==='r'&&mode==='play'){e.preventDefault();restart();}});
+window.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('dialog').open){e.preventDefault();if(document.fullscreenElement){toggleFullscreen();return;}if(mode==='edit'){board.focus({preventScroll:true});return;}if(!$('game-menu').hidden){hideMenu();$('menu-toggle').focus({preventScroll:true});}else{showMenu(true);$('close-menu').focus({preventScroll:true});}return;}if($('dialog').open||['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)||(e.key===' '&&['BUTTON','SUMMARY','A'].includes(e.target.tagName))||e.ctrlKey||e.metaKey||e.altKey)return;if((e.key==='Enter'||e.key==='Return')&&mode==='play'&&state.status==='won'&&!e.target.closest('button,a,summary,[contenteditable]')){e.preventDefault();if(!e.repeat){if(testMode)enterEditor();else nextRoom();}return;}if(e.key.toLowerCase()==='l'&&!e.target.closest('[contenteditable]')){e.preventDefault();if(!e.repeat)toggleFullscreen();return;}const actions={ArrowUp:'U',ArrowDown:'D',ArrowLeft:'L',ArrowRight:'R',w:'U',a:'L',s:'D',d:'R',' ':'W',x:'X'};const action=actions[e.key];if(action){e.preventDefault();if(e.repeat&&performance.now()-lastMove<105)return;lastMove=performance.now();move(action,e.repeat);}else if(e.key.toLowerCase()==='z'){e.preventDefault();undo();}else if(e.key.toLowerCase()==='r'&&mode==='play'){e.preventDefault();restart();}});
 buildPalette();updateSound();updateSaveLabel();renderMode();

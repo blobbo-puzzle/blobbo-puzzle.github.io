@@ -140,3 +140,14 @@ a{color:#183d79}
 #touch-drop-icon canvas{width:26px;height:26px;image-rendering:pixelated}
 #touch-drop-direction{font-size:20px;line-height:1}
 @media(any-pointer:coarse),(max-width:600px){.touch-drop{display:flex}.title-stripes{min-width:0}}
+
+/* Only Create mode reserves space for a persistent, independently scrolling palette. */
+body.creating{--editor-panel-width:330px}
+.creating #game-stage{left:calc(var(--editor-panel-width) + max(14px,env(safe-area-inset-left)) + 12px)}
+.creating .menu-anchor{top:max(14px,env(safe-area-inset-top));bottom:max(14px,env(safe-area-inset-bottom));left:max(14px,env(safe-area-inset-left));width:var(--editor-panel-width)}
+.creating .game-menu{position:static;width:100%;height:100%;max-width:none;max-height:none}
+@media(max-width:700px){
+ body.creating{--editor-panel-height:50dvh}
+ .creating #game-stage{left:0;bottom:calc(var(--editor-panel-height) + max(10px,env(safe-area-inset-bottom)) + 6px)}
+ .creating .menu-anchor{top:auto;right:max(10px,env(safe-area-inset-right));bottom:max(10px,env(safe-area-inset-bottom));left:max(10px,env(safe-area-inset-left));width:auto;height:var(--editor-panel-height)}
+}

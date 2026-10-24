@@ -1,5 +1,13 @@
 # Release verification
 
+## 0.8.2 — Persistent creator palette
+
+Checked 24 October 2026. Create mode keeps its controls open in a reserved sidebar, or below the map at widths of 700px and under. Placing tiles, dragging to paint, clicking outside and Escape no longer dismiss the creator panel. Play and Test room restore the normal full-size game area and dismissible gear menu.
+
+Actual-browser checks used the rebuilt standalone HTML at desktop size, 390 × 640 and 844 × 390. Repeated placements, drag painting, undo, independent palette scrolling, resizing across the layout breakpoint, playtesting and returning to the editor all worked. Regular Play still hides its menu after an outside click or Escape, and playtest movement works. The map remains clear of the editor panel. Audio stayed off. These are browser viewport checks, not a new physical-phone test.
+
+All 229 automated tests, all 34 built-in winning routes and generator seeds 0–999 pass. The standalone HTML and release packages are regenerated. Engine rules, maps and the deployment workflow are unchanged. No commit, push or deployment was performed.
+
 ## 0.8.1 — Mobile gadget controls
 
 Checked 24 October 2026. The new contextual Drop button uses the same `X` action as the keyboard; engine rules and room layouts are unchanged. It appears in the grey frame on touch-capable or narrow screens only while holding a tool, includes the gadget icon and facing arrow, and pauses activation during movement animation. A blocked drop produces a two-second message without consuming a turn. Pickup reminders keep their two-second, twice-per-map limit and use touch-specific instructions.

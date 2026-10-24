@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.2 — Persistent creator palette
+
+- Keep the Create panel open while placing and painting tiles, with a dedicated sidebar on larger screens and a panel below the map on narrow screens. Return to the normal hidden controls when playing or testing a room.
+
 ## 0.8.1 — Mobile gadget controls
 
 - Add a 44px touch Drop button in the game frame while carrying a gadget, with its icon and drop direction. Keep it off the map, update mobile pickup reminders, and explain blocked drops without opening the menu.
