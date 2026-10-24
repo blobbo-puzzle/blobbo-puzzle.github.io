@@ -1,0 +1,44 @@
+BLOBBO — READY TO UPLOAD
+
+PLAY OFFLINE
+Open Blobbo.html in Safari, Chrome, Firefox, or Edge. The game is entirely
+inside that file; no installation, internet connection, or supporting files
+are required. Use the gear menu's Full screen button to hide browser controls
+where supported. Esc exits. Music starts off.
+
+JUST SHARE A PLAYABLE WEBSITE
+Upload the CONTENTS of upload-to-host/ to your static web host. index.html
+must be at the website root. No build command or backend is needed.
+blobbo-web.zip contains exactly the same files, with index.html at ZIP root.
+
+SIMPLEST GITHUB PAGES OPTION (GAME ONLY)
+1. Create an empty GitHub repository, for example blobbo-browser.
+2. Add the contents of upload-to-host/ to the repository root on main.
+   In GitHub's web uploader, select the files inside the folder; do not add
+   an extra upload-to-host directory around them. Include .nojekyll if your
+   file picker shows hidden files; this game also works without it.
+3. Settings > Pages > Build and deployment > Source: Deploy from a branch.
+4. Select main and / (root), then Save. Pages will show the playable URL.
+Official guide:
+https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
+
+FULL SOURCE REPOSITORY (FOR CONTINUED DEVELOPMENT)
+Use upload-to-github/ as the repository root, including its hidden .github
+folder and .gitignore. GitHub Desktop or Git can include these reliably.
+Do not put both upload folders in the same repository.
+Settings > Pages > Source: GitHub Actions. Then Actions > Verify and deploy
+> Run workflow on main. Subsequent pushes to main verify and deploy the game.
+The included README.md and docs/hosting.md explain this workflow.
+blobbo-source.zip contains the same repository inside a blobbo/ folder.
+
+OTHER HOSTS
+Cloudflare Pages Direct Upload accepts blobbo-web.zip or upload-to-host/.
+An ordinary static host can serve the upload-to-host contents unchanged.
+Players need only a browser; Node.js is used only to develop/rebuild source.
+
+NOTES
+Progress and custom rooms stay in the player's browser. Export custom rooms
+to keep backups. A new website address has separate saved progress.
+Rights remain reserved under LICENSE.txt / LICENSE, as requested.
+Nothing has been uploaded or published by preparing these folders.
+Rebuild all release files from the source with: npm run release

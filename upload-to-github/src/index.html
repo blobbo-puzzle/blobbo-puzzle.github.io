@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="A browser puzzle inspired by the classic Macintosh Blobbo. Play, create, and explore at your own pace.">
+  <title>Blobbo</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="game-stage" aria-label="Blobbo game">
+    <section class="window" id="game-window" aria-label="Puzzle window">
+      <div class="titlebar"><span class="window-box" aria-hidden="true"></span><span class="title-stripes" id="title-stripes" aria-hidden="true"></span><div id="death-controls" class="death-controls" aria-label="Try again" hidden><button id="death-undo">Undo <kbd>Z</kbd></button><button id="death-restart">Restart <kbd>R</kbd></button></div><span class="window-zoom" aria-hidden="true"></span></div>
+      <div class="board-surround" id="board-surround"><canvas id="board" width="544" height="416" tabindex="0" aria-label="Puzzle board. Arrow keys or swipe to move. Space waits, Z undoes, R restarts, X drops a tool. Open the gear for game controls."></canvas><div id="board-overlay" hidden></div></div>
+    </section>
+  </main>
+
+  <div class="menu-anchor" id="menu-anchor">
+    <button id="menu-toggle" class="gear-button" aria-label="Game menu" aria-controls="game-menu" aria-expanded="false" title="Game menu (Esc)">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M13 2h6l1 5 3 1 4-2 3 5-4 3v4l4 3-3 5-4-2-3 1-1 5h-6l-1-5-3-1-4 2-3-5 4-3v-4l-4-3 3-5 4 2 3-1z"/><circle cx="16" cy="16" r="5"/></svg>
+    </button>
+    <aside id="game-menu" class="game-menu" aria-label="Game controls" hidden>
+      <header class="menu-title"><strong>Blobbo</strong><button id="close-menu" aria-label="Close game menu">×</button></header>
+      <div class="menu-content">
+        <div class="mode-tabs" role="tablist" aria-label="Workspace"><button role="tab" id="play-tab" aria-selected="true">Play</button><button role="tab" id="editor-tab" aria-selected="false">Create</button></div>
+        <button id="fullscreen" class="wide-button fullscreen-button" aria-pressed="false">Full screen</button>
+        <div id="play-sidebar">
+          <span id="room-number" class="room-number">ROOM 01</span><h1 id="room-name"></h1>
+          <div class="stats"><div><span>Chests</span><strong id="chests-stat">0 / 0</strong></div><div><span>Moves</span><strong id="moves-stat">000</strong></div><span id="best-score"></span></div>
+          <div id="inventory" class="inventory" aria-label="Inventory"></div>
+          <p id="game-message" class="game-message" role="status" aria-live="polite"></p>
+        </div>
+        <div class="play-tools" id="play-tools">
+          <div class="tool-group"><button id="undo" title="Undo (Z)">↶ Undo <kbd>Z</kbd></button><button id="restart" title="Restart (R)">↻ Restart <kbd>R</kbd></button><button id="wait" title="Wait a turn (Space)">Wait <kbd>Space</kbd></button><button id="drop" title="Drop your tool (X)" hidden>Drop <kbd>X</kbd></button></div>
+          <button id="next-room" class="wide-button">Next room →</button><button id="back-editor" class="wide-button" hidden>Back to editor</button>
+          <div class="touch-controls" aria-label="Directional controls"><button data-move="L" aria-label="Move left">←</button><div><button data-move="U" aria-label="Move up">↑</button><button data-move="D" aria-label="Move down">↓</button></div><button data-move="R" aria-label="Move right">→</button></div>
+          <p class="keyboard-guide" id="keyboard-guide">Arrow keys / WASD · Swipe or drag to move</p>
+        </div>
+        <div id="room-picker" class="menu-section">
+          <label class="field-label" for="collection">Rooms <span id="progress-count">0 / —</span></label><select id="collection"><option value="campaign">The campaign</option><option value="practice">Practice the gadgets</option><option value="challenge">Extra hard challenges</option></select>
+          <div id="room-grid" class="room-grid" aria-label="Choose a room"></div>
+          <button class="wide-button" id="all-rooms">Browse rooms…</button>
+        </div>
+        <div id="editor-sidebar" hidden>
+          <label class="field-label" for="room-title">Room name</label><input id="room-title" maxlength="60" value="My curious room">
+          <div class="editor-fields"><label>Width<input id="room-width" type="number" min="7" max="31" value="17"></label><label>Height<input id="room-height" type="number" min="7" max="23" value="13"></label><button id="resize-room" title="Apply room dimensions">Resize</button></div>
+          <div class="field-label palette-label">Pieces <span id="selected-piece">Wall</span></div><div id="palette" class="palette"></div>
+          <p id="tile-help" class="tile-help"></p><button id="editor-undo" class="wide-button">↶ Undo edit</button>
+        </div>
+        <div class="editor-tools menu-section" id="editor-tools" hidden><button id="new-room">New</button><button id="test-room" class="primary">Test room</button><button id="save-room">Save</button><button id="export-room">Export</button><button id="import-room">Import</button><button id="my-rooms">My rooms</button></div>
+        <div class="generator menu-section" id="generator" hidden><label class="field-label" for="seed">Maze seed</label><div><input id="seed" value="blobbo-1995" maxlength="80"><button id="generate">Generate</button></div></div>
+        <div class="menu-section">
+          <div class="audio-welcome" id="audio-welcome"><button id="start-audio">Enable sound &amp; music</button><button id="start-muted">Play silently</button></div>
+          <div class="audio-controls"><button id="sound" aria-pressed="false">Sound off</button><button id="music" aria-pressed="false">Music off</button></div>
+          <div class="experience-controls"><button id="audio-settings">Sound settings…</button><button id="motion" aria-pressed="true">Motion: classic</button></div>
+        </div>
+        <footer class="menu-section menu-footer"><div><button id="menu-guide">How to play</button><button id="about">About</button></div><span id="save-state">Progress saved on this browser</span></footer>
+      </div>
+    </aside>
+  </div>
+  <dialog id="dialog"><div class="dialog-title"><strong id="dialog-title"></strong><button id="close-dialog" aria-label="Close dialog">×</button></div><div id="dialog-content"></div></dialog>
+  <input type="file" id="import-file" accept="application/json,.json" hidden>
+  <div id="death-announcement" class="sr-only" role="status" aria-live="polite"></div>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

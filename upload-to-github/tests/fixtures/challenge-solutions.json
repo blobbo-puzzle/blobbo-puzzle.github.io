@@ -1,0 +1,238 @@
+{
+  "challenge-a2": {
+    "solution": "LLUUUURDRRRDDUDDRRUULLUUUUUDLLULLRUDRDDDLLLLD",
+    "mapHash": "67d4cd5f5baf0faec67a79c3788319d114cf8e430ce245dc2f1b7fdb0ccd2737",
+    "plan": [
+      "Move the bottom ball left to enter the central workspace. Push the first marshmallow upward twice; vacating its former support area releases the ball at (7,7) into (7,8).",
+      "Push the adjacent central marshmallow right to (8,6). Leave it there temporarily: the workspace must be entered from below now and crossed westward later. Do not clear space by shoving the eastern marshmallow into the lower arrow-release alcove.",
+      "Reach (10,9), then retreat upward to release the left-arrow along the bottom. The ball moved at the start now redirects that arrow into (5,9), reopening the southeast approach.",
+      "Use the newly open lower route to collect the southeast chest from below. On the return, push the ball at (11,8) left; it drops into the lower route you have finished using. Its timing changes access to the southeast corner.",
+      "Work upward through the eastern room, collect the two eastern chests, and lift the left-arrow at (8,3) into row 2 to open the northern chest approach.",
+      "Take the chest under the ball at (6,2), then leave sideways. That ball drops to (6,3); the right-arrow at (5,3) rounds it into row 2 and releases the western gate ball from (4,3). The top chest then acts as a second stopper until collected.",
+      "Return to the same marshmallow parked at (8,6), approach it from above, and push it down to (8,7). This opens the westbound workspace route while the other central marshmallow remains parked above.",
+      "Keep the western marshmallow at (3,5) in place. Push the fallen gate ball at (4,6) left into (3,6), then descend onto the stairs. Moving that marshmallow down prematurely would jam this final operation."
+    ],
+    "mechanics": [
+      "arrow:<",
+      "arrow:>",
+      "fall:O",
+      "push:<",
+      "push:M",
+      "push:O"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "LLUUUULLUULD",
+        "expectedStatus": "playing",
+        "cells": [
+          [
+            3,
+            6,
+            "M"
+          ],
+          [
+            4,
+            6,
+            "O"
+          ],
+          [
+            4,
+            7,
+            "E"
+          ],
+          [
+            3,
+            7,
+            "O"
+          ],
+          [
+            3,
+            8,
+            "#"
+          ],
+          [
+            2,
+            6,
+            "#"
+          ],
+          [
+            5,
+            7,
+            "#"
+          ],
+          [
+            4,
+            8,
+            ">"
+          ],
+          [
+            5,
+            8,
+            "#"
+          ],
+          [
+            4,
+            9,
+            "#"
+          ]
+        ],
+        "explanation": "Explore west and lower the marshmallow at (3,5) to clear the approach. This first wakes the ball at (4,3), dropping it to (4,6), then jams the marshmallow at (3,6). The ball can no longer be pushed left; pushing it right requires standing on the jammed marshmallow. The marshmallow cannot move down because (3,7) is another ball, cannot move up because standing at (3,7) is impossible, and cannot move sideways because (2,6) is wall and (4,6) is the gate ball. The only usable stairs approach is permanently closed. The existing ball at (3,7) and arrow at (4,8) cannot provide alternative stairs entrances."
+      },
+      {
+        "prefix": "LLUUUURDRURURDDD",
+        "expectedStatus": "playing",
+        "cells": [
+          [
+            10,
+            9,
+            "M"
+          ],
+          [
+            10,
+            10,
+            "<"
+          ],
+          [
+            12,
+            9,
+            "$"
+          ],
+          [
+            11,
+            8,
+            "O"
+          ],
+          [
+            12,
+            7,
+            "#"
+          ],
+          [
+            11,
+            7,
+            "#"
+          ],
+          [
+            11,
+            9,
+            "#"
+          ],
+          [
+            13,
+            8,
+            "#"
+          ],
+          [
+            9,
+            9,
+            "#"
+          ],
+          [
+            10,
+            11,
+            "#"
+          ]
+        ],
+        "explanation": "Make space by moving the central marshmallow upward, then push the eastern marshmallow right and down into (10,9). It becomes immovable in the one-cell release alcove, with walls on both sides and the left-arrow beneath it. The lower arrow remains at (10,10), blocking the only safe approach to the southeast chest. The arrow can no longer be released from above. Entering (9,10) and retreating left launches it directly into Blobbo; other departures from that square are blocked. The alternative approach from (10,8) requires pushing the ball at (11,8) right into (12,8), where it becomes stuck above the uncollected chest. Thus the chest at (12,9) is permanently isolated."
+      }
+    ]
+  },
+  "challenge-c": {
+    "solution": "UULLUURRRDDDLDRRRRRLLLLUUUURUULDRDLLLRRDDLUDLLUUURULLLLRRRRDDRDRUURULDDLLURRDRUUUUDDLDLLLL",
+    "mapHash": "876f3d6b08dd970a31b9fd7df59e69e7d8b58d68fa5fb586dc7da0f919b91283",
+    "plan": [
+      "Raise the marshmallow only as far as (7,6), reserving it for permanent spike cover. Use the western loop to get above the southern cork.",
+      "Lower the southern cork to row 9, get to its left, and commit it to the southeast hole. The left recess is an unrecoverable parking trap.",
+      "Move the upper-right cork down into the shared row 5, then transport it left to (5,5). The northern cork must remain in place as temporary spike cover.",
+      "Advance the marshmallow to (7,5) while preserving access through the lower loop. Lift the westbound cork at column 5 and plug the western hole from its right.",
+      "Use the now-vacated eastern lifting space: move the marshmallow right into column 8, raise it to row 3, then push it left into (7,3). This replacement cover releases the northern cork for its final job.",
+      "Push the former shield cork right to column 9, then up into the northern hole. Collect its chest and return to the stairs."
+    ],
+    "mechanics": [
+      "push:C",
+      "push:M",
+      "splash:C"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "UULLUURRRURUL",
+        "expectedStatus": "playing",
+        "cells": [
+          [
+            7,
+            1,
+            "!"
+          ],
+          [
+            7,
+            2,
+            "."
+          ],
+          [
+            7,
+            3,
+            "C"
+          ],
+          [
+            6,
+            2,
+            "#"
+          ],
+          [
+            8,
+            2,
+            "#"
+          ],
+          [
+            8,
+            3,
+            "."
+          ]
+        ],
+        "explanation": "The upper-right cork can be pushed upward and then left into (7,3), apparently solving the spike-cover job early. This permanently commits a required cork to cover. From (7,3), any sideways push exposes Blobbo to the spike; pushing down requires standing at (7,2), adjacent to the spike. Pushing up only strands the cork at (7,2), between side walls and the spike. No other object can enter (7,2) from either side, so the cork cannot be recovered for a hole. All three corks are required for the three chest entrances."
+      },
+      {
+        "prefix": "UULLUURRRDDDRDLLL",
+        "expectedStatus": "playing",
+        "cells": [
+          [
+            5,
+            9,
+            "C"
+          ],
+          [
+            5,
+            8,
+            "#"
+          ],
+          [
+            5,
+            10,
+            "#"
+          ],
+          [
+            4,
+            9,
+            "."
+          ],
+          [
+            4,
+            8,
+            "#"
+          ],
+          [
+            4,
+            10,
+            "#"
+          ],
+          [
+            3,
+            9,
+            "#"
+          ]
+        ],
+        "explanation": "After lowering the southern cork to the bottom row, parking it left at (5,9) appears to clear the shared passage. It can never return: walls prevent upward/downward pushes, and the required square (4,9) for pushing right is a dead-end pocket accessible only through the cork itself. Pushing farther left strands it at (4,9). This leaves at most two usable corks for three mandatory holes."
+      }
+    ]
+  }
+}

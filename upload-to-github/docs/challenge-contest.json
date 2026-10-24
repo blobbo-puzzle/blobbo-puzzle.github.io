@@ -1,0 +1,258 @@
+{
+  "date": "2026-10-23",
+  "dimensions": [
+    15,
+    13
+  ],
+  "referenceActionCap": 110,
+  "attemptTimeLimitSeconds": 480,
+  "attemptBatchLimit": 60,
+  "maxActionsPerBatch": 20,
+  "blindness": "Fresh agent contexts and separate neutral packets; instruction-enforced, not OS-isolated.",
+  "rounds": [
+    {
+      "round": 1,
+      "engineHash": "7f9cc6b813ab510b8fb7eaee6b99d88b8200f27b4a2ddbd42d46572f4b8d760c",
+      "maps": [
+        {
+          "packet": "puzzle-1",
+          "designer": "c",
+          "id": "challenge-c",
+          "name": "The Shield Exchange",
+          "mapHash": "3010f79e5d6327262d781d9818b3406c6a211e5c661a5e01105b68d86bc291fa",
+          "referenceMoves": 85,
+          "shortenedMoves": 83,
+          "selected": false
+        },
+        {
+          "packet": "puzzle-2",
+          "designer": "a",
+          "id": "challenge-a",
+          "name": "Borrowed Bearings",
+          "mapHash": "77ac8cd09ec6c29356fcf13a330ab41c0b2cc76dcc83c3cd96aa6ea8adf26540",
+          "referenceMoves": 42,
+          "shortenedMoves": 42,
+          "selected": false
+        },
+        {
+          "packet": "puzzle-3",
+          "designer": "b",
+          "id": "challenge-b",
+          "name": "Borrowed Growth",
+          "mapHash": "79eb22640f9bc8540ab48ad7d49f79a2a7349b835160f2e23a2f263e970a49b5",
+          "referenceMoves": 65,
+          "shortenedMoves": 65,
+          "selected": false
+        }
+      ],
+      "attempts": [
+        {
+          "solver": "solver-1",
+          "mapId": "challenge-c",
+          "name": "The Shield Exchange",
+          "packet": "puzzle-1",
+          "mapHash": "3010f79e5d6327262d781d9818b3406c6a211e5c661a5e01105b68d86bc291fa",
+          "solved": true,
+          "seconds": 209,
+          "batches": 10,
+          "undoCommands": 1,
+          "resets": 0,
+          "verifiedMoves": 99,
+          "shortenedMoves": 99
+        },
+        {
+          "solver": "solver-1",
+          "mapId": "challenge-a",
+          "name": "Borrowed Bearings",
+          "packet": "puzzle-2",
+          "mapHash": "77ac8cd09ec6c29356fcf13a330ab41c0b2cc76dcc83c3cd96aa6ea8adf26540",
+          "solved": true,
+          "seconds": 281,
+          "batches": 12,
+          "undoCommands": 1,
+          "resets": 0,
+          "verifiedMoves": 65,
+          "shortenedMoves": 60
+        },
+        {
+          "solver": "solver-2",
+          "mapId": "challenge-a",
+          "name": "Borrowed Bearings",
+          "packet": "puzzle-2",
+          "mapHash": "77ac8cd09ec6c29356fcf13a330ab41c0b2cc76dcc83c3cd96aa6ea8adf26540",
+          "solved": true,
+          "seconds": 254,
+          "batches": 16,
+          "undoCommands": 1,
+          "resets": 0,
+          "verifiedMoves": 63,
+          "shortenedMoves": 60
+        },
+        {
+          "solver": "solver-2",
+          "mapId": "challenge-b",
+          "name": "Borrowed Growth",
+          "packet": "puzzle-3",
+          "mapHash": "79eb22640f9bc8540ab48ad7d49f79a2a7349b835160f2e23a2f263e970a49b5",
+          "solved": true,
+          "seconds": 175,
+          "batches": 8,
+          "undoCommands": 2,
+          "resets": 0,
+          "verifiedMoves": 74,
+          "shortenedMoves": 62
+        },
+        {
+          "solver": "solver-3",
+          "mapId": "challenge-c",
+          "name": "The Shield Exchange",
+          "packet": "puzzle-1",
+          "mapHash": "3010f79e5d6327262d781d9818b3406c6a211e5c661a5e01105b68d86bc291fa",
+          "solved": true,
+          "seconds": 139,
+          "batches": 6,
+          "undoCommands": 0,
+          "resets": 0,
+          "verifiedMoves": 77,
+          "shortenedMoves": 77
+        },
+        {
+          "solver": "solver-3",
+          "mapId": "challenge-b",
+          "name": "Borrowed Growth",
+          "packet": "puzzle-3",
+          "mapHash": "79eb22640f9bc8540ab48ad7d49f79a2a7349b835160f2e23a2f263e970a49b5",
+          "solved": true,
+          "seconds": 198,
+          "batches": 9,
+          "undoCommands": 3,
+          "resets": 0,
+          "verifiedMoves": 64,
+          "shortenedMoves": 64
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "engineHash": "7f9cc6b813ab510b8fb7eaee6b99d88b8200f27b4a2ddbd42d46572f4b8d760c",
+      "maps": [
+        {
+          "packet": "puzzle-3",
+          "designer": "a",
+          "id": "challenge-a2",
+          "name": "Secondhand Supports",
+          "mapHash": "67d4cd5f5baf0faec67a79c3788319d114cf8e430ce245dc2f1b7fdb0ccd2737",
+          "referenceMoves": 45,
+          "shortenedMoves": 45,
+          "selected": true
+        },
+        {
+          "packet": "puzzle-2",
+          "designer": "c",
+          "id": "challenge-c",
+          "name": "The Last Cork",
+          "mapHash": "876f3d6b08dd970a31b9fd7df59e69e7d8b58d68fa5fb586dc7da0f919b91283",
+          "referenceMoves": 90,
+          "shortenedMoves": 90,
+          "selected": true
+        },
+        {
+          "packet": "puzzle-1",
+          "designer": "b",
+          "id": "challenge-b",
+          "name": "The Relay Garden",
+          "mapHash": "8e0e683133d3f362af805006dd76ce9974fad4845f3633decf3d6dba8a57d1a6",
+          "referenceMoves": 80,
+          "shortenedMoves": 80,
+          "selected": false
+        }
+      ],
+      "attempts": [
+        {
+          "solver": "solver-4",
+          "mapId": "challenge-b",
+          "name": "The Relay Garden",
+          "packet": "puzzle-1",
+          "mapHash": "8e0e683133d3f362af805006dd76ce9974fad4845f3633decf3d6dba8a57d1a6",
+          "solved": true,
+          "seconds": 182,
+          "batches": 5,
+          "undoCommands": 0,
+          "resets": 0,
+          "verifiedMoves": 76,
+          "shortenedMoves": 76
+        },
+        {
+          "solver": "solver-4",
+          "mapId": "challenge-a2",
+          "name": "Secondhand Supports",
+          "packet": "puzzle-3",
+          "mapHash": "67d4cd5f5baf0faec67a79c3788319d114cf8e430ce245dc2f1b7fdb0ccd2737",
+          "solved": true,
+          "seconds": 378,
+          "batches": 11,
+          "undoCommands": 2,
+          "resets": 0,
+          "verifiedMoves": 71,
+          "shortenedMoves": 61
+        },
+        {
+          "solver": "solver-5",
+          "mapId": "challenge-b",
+          "name": "The Relay Garden",
+          "packet": "puzzle-1",
+          "mapHash": "8e0e683133d3f362af805006dd76ce9974fad4845f3633decf3d6dba8a57d1a6",
+          "solved": true,
+          "seconds": 144,
+          "batches": 6,
+          "undoCommands": 0,
+          "resets": 0,
+          "verifiedMoves": 73,
+          "shortenedMoves": 73
+        },
+        {
+          "solver": "solver-5",
+          "mapId": "challenge-c",
+          "name": "The Last Cork",
+          "packet": "puzzle-2",
+          "mapHash": "876f3d6b08dd970a31b9fd7df59e69e7d8b58d68fa5fb586dc7da0f919b91283",
+          "solved": true,
+          "seconds": 275,
+          "batches": 8,
+          "undoCommands": 0,
+          "resets": 1,
+          "verifiedMoves": 100,
+          "shortenedMoves": 100
+        },
+        {
+          "solver": "solver-6",
+          "mapId": "challenge-c",
+          "name": "The Last Cork",
+          "packet": "puzzle-2",
+          "mapHash": "876f3d6b08dd970a31b9fd7df59e69e7d8b58d68fa5fb586dc7da0f919b91283",
+          "solved": false,
+          "seconds": 484,
+          "batches": 11,
+          "undoCommands": 1,
+          "resets": 2,
+          "verifiedMoves": null,
+          "shortenedMoves": null
+        },
+        {
+          "solver": "solver-6",
+          "mapId": "challenge-a2",
+          "name": "Secondhand Supports",
+          "packet": "puzzle-3",
+          "mapHash": "67d4cd5f5baf0faec67a79c3788319d114cf8e430ce245dc2f1b7fdb0ccd2737",
+          "solved": true,
+          "seconds": 274,
+          "batches": 10,
+          "undoCommands": 0,
+          "resets": 0,
+          "verifiedMoves": 55,
+          "shortenedMoves": 53
+        }
+      ]
+    }
+  ]
+}

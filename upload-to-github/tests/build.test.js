@@ -1,0 +1,56 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
+import vm from 'node:vm';
+import { LEVELS, CHAPTERS, PRACTICE_LEVELS, PRACTICE_CHAPTERS } from '../src/levels.js';
+import { CHALLENGE_LEVELS } from '../src/challenges.js';
+
+const project = fileURLToPath(new URL('../', import.meta.url));
+execFileSync(process.execPath, ['scripts/build.mjs'], { cwd: project, stdio: 'pipe' });
+const html = await readFile(new URL('../release/Blobbo.html', import.meta.url), 'utf8');
+const scripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
+const styles = [...html.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/gi)];
+
+test('the offline edition contains one complete, parseable game script', () => {
+  assert.equal(scripts.length, 1);
+  assert.doesNotMatch(scripts[0][1], /\bsrc\s*=/i);
+  const script = scripts[0][2];
+  assert.doesNotMatch(script, /^\s*(?:import|export)\s/m);
+  assert.doesNotThrow(() => new vm.Script(script, { filename: 'Blobbo.html' }));
+});
+
+test('the offline edition embeds its styles, icon, and runtime dependencies', () => {
+  assert.ok(styles.length > 0);
+  for (const [, css] of styles) {
+    assert.doesNotMatch(css, /@import\b/i);
+    for (const [, url] of css.matchAll(/url\(\s*['"]?([^)'"\s]+)/gi)) {
+      assert.ok(url.startsWith('data:') || url.startsWith('#'), `External CSS resource: ${url}`);
+    }
+  }
+  assert.doesNotMatch(html, /<link\b[^>]*rel=["'](?:stylesheet|preload|modulepreload)["']/i);
+  assert.match(html, /rel="icon" href="data:image\/svg\+xml,/);
+  // Reference hyperlinks may remain online; assets needed to play may not.
+  for (const [, tag, source] of html.matchAll(/<(script|img|audio|video|source|iframe)\b[^>]*\bsrc=["']([^"']+)["']/gi)) {
+    assert.ok(source.startsWith('data:'), `${tag} requires an external asset: ${source}`);
+  }
+  assert.doesNotMatch(scripts[0][2], /\b(?:fetch|import)\s*\(|\bXMLHttpRequest\b|\bWebSocket\b/);
+});
+
+test('the offline edition includes the campaign and practice collections and their verified solutions', () => {
+  const script = scripts[0][2];
+  for (const chapter of [...CHAPTERS, ...PRACTICE_CHAPTERS]) assert.ok(script.includes(chapter.name), `Missing chapter: ${chapter.name}`);
+  for (const level of [...LEVELS, ...PRACTICE_LEVELS]) {
+    assert.ok(script.includes(level.name), `Missing room: ${level.id}`);
+    assert.ok(script.includes(level.solution), `Missing saved solution: ${level.id}`);
+  }
+});
+
+test('challenge rooms are playable offline without bundling their private solution keys', async () => {
+  const keys=JSON.parse(await readFile(new URL('./fixtures/challenge-solutions.json',import.meta.url),'utf8'));
+  for(const level of CHALLENGE_LEVELS){
+    assert.ok(scripts[0][2].includes(level.name));
+    assert.ok(!scripts[0][2].includes(keys[level.id].solution),`Leaked challenge solution: ${level.id}`);
+  }
+});
