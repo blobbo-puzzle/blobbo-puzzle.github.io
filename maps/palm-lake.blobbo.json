@@ -1,0 +1,23 @@
+{
+  "format": "blobbo-browser",
+  "version": 1,
+  "level": {
+    "id": "readme-palm-lake-demo",
+    "name": "Palm Lake",
+    "chapter": "custom",
+    "description": "A small garden adventure created only for the README demonstration.",
+    "rows": [
+      "#################",
+      "#T.O..#~~~~#T..T#",
+      "#..#..#~~~~#.$..#",
+      "#.T#..#~~~~..##.#",
+      "#.$.A.#~~~~..O..#",
+      "#.....T~~~~....E#",
+      "#.##..#~~~~..##.#",
+      "#...T.#~~~~.T...#",
+      "#.@...#~~~~.....#",
+      "#T....#~~~~#O..T#",
+      "#################"
+    ]
+  }
+}

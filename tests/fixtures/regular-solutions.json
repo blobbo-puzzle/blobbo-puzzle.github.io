@@ -1,0 +1,681 @@
+{
+  "compact-borrowed-weight-v1": {
+    "mapHash": "cbf027cecad8695be8e9c6e38e7aeb3e772b0f16f3a402f3c718034a91997b32",
+    "solution": "RURXLUURRLDRDDDD",
+    "plan": [
+      "Pick up the extinguisher and drop it below the hanging ball as a temporary support.",
+      "Release the ball onto that support, keeping the spike screened while collecting the other chest.",
+      "Push the ball onto the side ledge before retrieving the extinguisher. Clear the fire and descend to the exit."
+    ],
+    "mechanics": [
+      "pickup:K",
+      "drop:K",
+      "fall:O",
+      "push:O",
+      "tool:K"
+    ],
+    "counterfactuals": []
+  },
+  "compact-cross-purposes-v1": {
+    "mapHash": "96ae93894b898568ce99bc9a265da7d1214aecc8f5ead30f563a4920b28374de",
+    "solution": "UURUULRLLUDRRDRDRLDLD",
+    "plan": [
+      "Lift the lower arrow into the middle row to open the start.",
+      "Approach the upper-left chest by releasing the left arrow in stages and letting the ball fall out of its approach.",
+      "Return around the top of the lower arrow, push it down into a different row, and collect the right chest before exiting."
+    ],
+    "mechanics": [
+      "push:>",
+      "arrow:>",
+      "arrow:<",
+      "fall:O"
+    ],
+    "counterfactuals": []
+  },
+  "compact-collateral-v1": {
+    "mapHash": "8002a8072a903680215272ecf554e79e214fc2b9e09c6bfbfd6c3f39daa725e1",
+    "solution": "URRULURDRRDRUUUDDDDLLLD",
+    "plan": [
+      "Keep the cork in place while moving the marshmallow above it to screen the spike.",
+      "Move the freed cork right, keeping space to stand below it. Push it up into the hole.",
+      "Collect the isolated chest and return through the bottom passage to the stairs."
+    ],
+    "mechanics": [
+      "push:M",
+      "push:C",
+      "splash:C"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "URRULURDRRR",
+        "maxStates": 73
+      }
+    ]
+  },
+  "compact-side-door-v1": {
+    "mapHash": "a8d981a5c99405eced06633e79f03d0e266409947d173d1117575f43b117adf5",
+    "solution": "DLUDULLDUUUURRRURRLLL",
+    "plan": [
+      "Shift the bottom marshmallow left, then step into and out of the lower arrow lane to release it.",
+      "Reach the left chest around the shifted marshmallow. Push the left-facing arrow upward twice to open the upper passage.",
+      "Leave the cell below the upper ball sideways so it falls behind you. Collect the top-right chest and return to the stairs."
+    ],
+    "mechanics": [
+      "push:M",
+      "arrow:>",
+      "push:<",
+      "fall:O"
+    ],
+    "counterfactuals": []
+  },
+  "compact-the-green-jack-v1": {
+    "mapHash": "ce14153a11399cd5fc1194ea7a1b6bae2b1216cdfc3b0703f846880ab91bf179",
+    "solution": "RRRUWRRRDLLLDDDDDD",
+    "plan": [
+      "Climb onto the chest beneath the ball. Wait once to let the upward plant build a support at the height of the open cross passage.",
+      "Leave the ball onto that support and collect the shears on the right. Push the supported ball sideways out of the shaft.",
+      "Cut down through the vine to the final chest and exit. Releasing the ball too early traps it between the shaft walls."
+    ],
+    "mechanics": [
+      "grow",
+      "fall:O",
+      "pickup:S",
+      "push:O",
+      "tool:S"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "RRRUL",
+        "maxStates": 367
+      }
+    ]
+  },
+  "compact-back-and-forth-v1": {
+    "mapHash": "db47c094b27848192237cfd5b7d0e3ae32835dc81b18a1a669b7aabf8462f843",
+    "solution": "DRRUURUULDLLLLRDURRD",
+    "plan": [
+      "Push the right marshmallow up twice and use the right pocket to approach the upper chest.",
+      "Push the marshmallow back down from above; this also releases the arrow behind you.",
+      "Approach the left chest from above, letting its ball fall. Push that ball right in stages until you can descend into the stairs."
+    ],
+    "mechanics": [
+      "push:M",
+      "arrow:>",
+      "fall:O",
+      "push:O"
+    ],
+    "counterfactuals": []
+  },
+  "compact-falling-into-place-v1": {
+    "mapHash": "55277e24376f613a22e3dc43efe0fd2327f453190c262fdf8377bfe000d321a9",
+    "solution": "DDDDRUULULLLDDRLUULRLUU",
+    "plan": [
+      "Release the upper arrow and its supported ball, then collect the bottom-right chest from the right passage.",
+      "Push the fallen ball left onto the central chest, then move the central marshmallow down to make an escape route.",
+      "Collect the chest under the ball and leave sideways. Approach the exit ball from below and step aside to let it fall, opening the stairs."
+    ],
+    "mechanics": [
+      "arrow:>",
+      "fall:O",
+      "push:O",
+      "push:M"
+    ],
+    "counterfactuals": []
+  },
+  "compact-held-in-reserve-v1": {
+    "mapHash": "69bb0e5f8520a397b2478d43a4d79a1a733c5aa088da3d25aba8241057761ab2",
+    "solution": "UULUDDRRRUDDRDDLLRUULLL",
+    "plan": [
+      "Raise the left marshmallow into the top row before collecting the top-left chest; it then stops the left arrow.",
+      "Release the right-facing arrow from the middle row and leave the top arrow lane safely.",
+      "Collect the lower chest, step left to release its ball, then push the ball right to reopen the return path to the exit."
+    ],
+    "mechanics": [
+      "push:M",
+      "arrow:>",
+      "arrow:<",
+      "fall:O",
+      "push:O"
+    ],
+    "counterfactuals": []
+  },
+  "compact-a-place-for-everything-v1": {
+    "mapHash": "211f13c9f724f6849399dd578d3837f9d45f5e7cd02c2cc854a77c8332f05949",
+    "solution": "DDUULDLUDLDURRDRDDLDURRDR",
+    "plan": [
+      "First visit the cell beside the upper ball and retreat to release the two-ball cascade.",
+      "Lower the upper marshmallow one cell, release the upper arrow, and collect the left chest.",
+      "Return and lower the marshmallow again. From the right, push the lower ball left onto its neighbour, collect the bottom chest, then leave right and continue to the exit."
+    ],
+    "mechanics": [
+      "fall:O",
+      "push:M",
+      "arrow:>",
+      "push:O"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "DL",
+        "maxStates": 297
+      },
+      {
+        "prefix": "DDUL",
+        "maxStates": 154
+      }
+    ]
+  },
+  "compact-borrowed-cover-v1": {
+    "mapHash": "a0c5d4e87cd67632c87a884189941bd76bb8d7802c3fc8227c5f9bc91c746579",
+    "solution": "UUURRRURRRDDDRDUUULLLLULDDDDDD",
+    "plan": [
+      "Move the cork beside the left hole without plugging it. It must block the ball’s leftward rolling clearance.",
+      "Release the upper ball so it rolls to the right of the lower ball, screening the spike while you collect the right chest.",
+      "Bring the cork back to the left shaft. Only now use it to plug the lower hole, collect the last chest, and reach the exit."
+    ],
+    "mechanics": [
+      "push:C",
+      "fall:O",
+      "splash:C"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "UUURRRURD",
+        "maxStates": 512
+      }
+    ]
+  },
+  "compact-one-too-soon-v1": {
+    "mapHash": "39b388b85d650b804788ba16a65bc0d527220e7045fbf3d2ad74393c719dca2a",
+    "solution": "URUUUURRRRLLDLDLLUDRDDDRRLRUUURRRD",
+    "plan": [
+      "Leave the chest below the lower ball stack alone. Reach the upper chest, release its ball onto the ledge, then push that ball left onto the stack.",
+      "Collect the arrow-lane chest and leave upward. The completed stack diverts the arrow into the upper pocket instead of the exit approach.",
+      "Collect the base chest, drain the stack into the hole, and return through the one-way passage to the now-clear exit."
+    ],
+    "mechanics": [
+      "fall:O",
+      "push:O",
+      "arrow:>",
+      "splash:O"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "RRR",
+        "maxStates": 700
+      }
+    ]
+  },
+  "compact-still-life-v1": {
+    "mapHash": "995cfb99b3ebd4cf39c57234f48265d0b21c653e97de796f2b8185fc2d95e1fd",
+    "solution": "DDLLDRRRR",
+    "plan": [
+      "Descend twice to grow the vine exactly to row 6 (one-based), leaving the row above open.",
+      "Leave the vine column, approach the arrow from above, and push it down.",
+      "The vine catches the arrow beside its stem, directly between the chest and the spike.",
+      "Collect the chest and cross just above the vine to the stairs."
+    ],
+    "insight": "A living brake turns an arrow into a spike shield, but one extra growth closes the exit crossing.",
+    "mechanics": [
+      "grow",
+      "push:>",
+      "arrow:>"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "W",
+        "maxStates": 50000,
+        "explanation": "An extra initial growth makes the vine reach the only exit crossing before Blobbo can leave its column; exhaustive search from this legal prefix finds no solution."
+      }
+    ],
+    "actionBudget": 75,
+    "designer": "db-r1"
+  },
+  "compact-open-for-business-v1": {
+    "mapHash": "b73554a5d8215968396c386bf22986753ed392b3b4e7a0305d9981299602e913",
+    "solution": "DDRRRLDRDDDUUURRR",
+    "plan": [
+      "Leave the cork supporting the ball while approaching the ball from the left.",
+      "Push the ball right into the still-open hole; the ball disappears without filling it.",
+      "Now plug the same hole with the cork.",
+      "Take the chest below the former support, then cross the bridge to the stairs."
+    ],
+    "insight": "The future bridge must first serve as the ball’s disposal chute.",
+    "mechanics": [
+      "push:O",
+      "splash:O",
+      "splash:C"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "DDDRRR",
+        "maxStates": 200000,
+        "explanation": "Plugs the hole before disposing of the ball; exhaustive search exhausts 19 states without a win."
+      }
+    ],
+    "actionBudget": 75,
+    "designer": "dd-r1"
+  },
+  "compact-pruning-time-v1": {
+    "mapHash": "d3cdf058152a9953302fbb2f4d9341111783d4aa5f514c6b601d889230fccebf",
+    "solution": "DDLDLLLDRRRRRR",
+    "plan": [
+      "Descend twice so the vine tip grows into the spike’s row.",
+      "Collect the chest and shears in the sheltered left chamber.",
+      "Cross through the lower stem while leaving the living tip intact.",
+      "Pass beneath the surviving screen to reach the stairs."
+    ],
+    "insight": "Cut the stem below the crown: the disconnected upper vine remains a useful shield.",
+    "mechanics": [
+      "grow",
+      "pickup:S",
+      "tool:S"
+    ],
+    "counterfactuals": [],
+    "actionBudget": 75,
+    "designer": "db-r3"
+  },
+  "compact-crosswinds-v1": {
+    "mapHash": "5fd0c03727f904191f01dbc173d4424b7e41c9e77f753939fd20dcc88ab4c80b",
+    "solution": "URUURURRDLDDRUULURRUR",
+    "plan": [
+      "Push the arrow up into the spike row; its rightward flight creates a horizontal shield.",
+      "Use that shield to reach and collect the chest above the marshmallow.",
+      "Return below the marshmallow and push it up twice into the upper lane.",
+      "Approach from its left and push it right beneath the exit, creating the vertical shield needed to enter the stairs."
+    ],
+    "insight": "The arrow buys access to a second shield, and that shield must change lanes before the exit is safe.",
+    "mechanics": [
+      "push:>",
+      "arrow:>",
+      "push:M"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "URUURURRDLDDRUUU",
+        "maxStates": 100000,
+        "explanation": "After this legal prefix, exhaustive continuation search finds no win (100 unique states; finite board has no growing plants or tools). Events: push:M."
+      }
+    ],
+    "actionBudget": 75,
+    "designer": "dc-r1"
+  },
+  "compact-arrival-order-v1": {
+    "mapHash": "285ddd875ad5a0b328af92811d71e8b2e1eae76a19e7de7a9c5069e57ac47521",
+    "solution": "RRRRRRLUULLLLLDDRRRRRRD",
+    "plan": [
+      "Leave the upper chest in place: it is holding the ball above the cork lane.",
+      "Push the cork all the way right to fill the hole.",
+      "Climb below the chest, collect it, and leave left so the ball drops behind you.",
+      "Return by the left loop; push the ball twice into the newly filled landing square and take the stairs."
+    ],
+    "insight": "The hole must be filled before the tempting chest releases a ball into the only route available to its cork.",
+    "mechanics": [
+      "push:C",
+      "splash:C",
+      "fall:O",
+      "push:O"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "UURRRRRL",
+        "maxStates": 100000,
+        "explanation": "Actual-engine continuation exhausts 36 states without a win."
+      }
+    ],
+    "actionBudget": 75,
+    "designer": "de-r1"
+  },
+  "compact-on-loan-v1": {
+    "mapHash": "9cd9a0a71ebc674415b4126efdef5bdd98b5cfb8b38bd950880d93b32527c714",
+    "solution": "RUXRUULULLDRDRURUURR",
+    "plan": [
+      "Pick up the axe and place it in the spike lane from below.",
+      "Cross the lane on the shielded side and walk above the marshmallow.",
+      "Push the marshmallow down between the spike and the axe.",
+      "Recover the axe, carve the tree, push the canoe out of the gate and collect the chest."
+    ],
+    "insight": "The axe must protect the crossing before it can cut anything; a shield installed from the far side lets you reclaim it.",
+    "mechanics": [
+      "pickup:A",
+      "drop:A",
+      "push:M",
+      "tool:A",
+      "push:B"
+    ],
+    "counterfactuals": [],
+    "actionBudget": 75,
+    "designer": "da-r2"
+  },
+  "compact-over-and-under-v1": {
+    "mapHash": "cba048fc16dfef2d3142c850a9afcbc51a1519b9822d7e481e2b213b02fed6df",
+    "solution": "LUUURRRDDLDRDRUULURRRR",
+    "plan": [
+      "Collect the chest and approach the ball from the left.",
+      "Push the ball across the stone shelf and the cork, then off the far edge.",
+      "Lower the cork into the bottom room and move it right above the resting ball.",
+      "Push the ball aside to gain the square needed to raise the cork.",
+      "Raise the cork back to the exit lane and plug the hole."
+    ],
+    "insight": "The cork first supports the ball; the ball then occupies the exact square you need to send the cork back upward.",
+    "mechanics": [
+      "push:O",
+      "fall:O",
+      "push:C",
+      "splash:C"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "RRUU",
+        "maxStates": 200000,
+        "explanation": "Raising the cork immediately traps it against the ceiling; exhaustive search exhausts 220 states."
+      }
+    ],
+    "actionBudget": 75,
+    "designer": "dd-r3"
+  },
+  "compact-catch-and-release-v1": {
+    "mapHash": "f4bb1db1bf051b75afee8beec59686a977f7ee09ddf06d6ff5cf157d3ac374ec",
+    "solution": "DDRRRULDRRDRDDRDLLRUULDUURR",
+    "plan": [
+      "Send the lower ball right until the chest stops its fall.",
+      "Release the upper ball and push it into the same shaft, where it rolls around the waiting ball into the right lane.",
+      "Circle below and push that second ball left twice to form a support under the first ball’s eventual landing square.",
+      "Push the first ball left into the protected landing square, collect the chest beside it, then retreat upward before taking the exit."
+    ],
+    "insight": "The first ball catches and diverts the second, then the second returns to support the first while Blobbo briefly prevents a sideways roll.",
+    "mechanics": [
+      "push:O",
+      "fall:O"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "DDRRRULDRRDRDL",
+        "maxStates": 100000,
+        "explanation": "After this legal prefix, exhaustive continuation search finds no win (57 unique states; finite board has no growing plants or tools). Events: push:O, fall:O, fall:O."
+      }
+    ],
+    "actionBudget": 75,
+    "designer": "dc-r3"
+  },
+  "compact-temporary-address-v1": {
+    "mapHash": "b3097588eb255dacabffc7492d7a3760bcaac2f8260a851f6b9d38da551ef97d",
+    "solution": "DDRRUURLLUURDLDRRURDDDRR",
+    "plan": [
+      "Park the cork above or below its starting square so the first chest can be collected.",
+      "Collect that chest and leave safely sideways; the ball follows the ramp into the still-open hole.",
+      "Retrieve the cork from its parking square, then push it right along the cleared chest row.",
+      "Get above it using the upper loop; push it down into the hole and collect the final chest."
+    ],
+    "insight": "The cork must be parked reversibly while the hole still serves as the ball’s disposal chute.",
+    "mechanics": [
+      "push:C",
+      "fall:O",
+      "splash:O",
+      "splash:C"
+    ],
+    "counterfactuals": [],
+    "actionBudget": 75,
+    "designer": "de-r2"
+  },
+  "compact-intervals-v1": {
+    "mapHash": "385506588322466d7528891dc758fe3471576e0ecff6866568b937201b8c9bc6",
+    "solution": "DWRRDLLLDLLLDURRRRDDDRRR",
+    "plan": [
+      "Grow the vine into the spike’s row.",
+      "Push the left arrow down so the vine catches it on its right side.",
+      "Collect the left chest and shears, then cut the vine tip while the arrow provides cover.",
+      "Step down into the stem: leaving the row releases the arrow only after you are safely below it.",
+      "Cut through the root and collect the lower chest before exiting."
+    ],
+    "insight": "The vine catches the arrow, which then replaces the vine as a shield for exactly the one step needed to cut through.",
+    "mechanics": [
+      "grow",
+      "push:<",
+      "arrow:<",
+      "pickup:S",
+      "tool:S"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "DRRD",
+        "maxStates": 100000,
+        "explanation": "Pushing the arrow before the vine reaches its firing row leaves the arrow on the wrong side. Exhaustive search from this legal prefix found no winning continuation (22 states)."
+      }
+    ],
+    "actionBudget": 75,
+    "designer": "db-r4"
+  },
+  "compact-passing-place-v1": {
+    "mapHash": "63ff853e72c123154f08fd94c3d9fe0bbfc6b2241bf31dcf400da8358653fe78",
+    "solution": "RLULUULUURDDDDLLDRRRRDRUULURRR",
+    "plan": [
+      "Step right to let the ball fall onto the centre ledge, then push it left into the bottom pocket.",
+      "Push the cork upward twice to enter the upper loop.",
+      "Circle over it, reverse direction and push the same cork four squares down.",
+      "Collect the chest and escort the cork across the lower room, up the right side, and into the exit hole."
+    ],
+    "insight": "The cork must first travel away from the hole so you can cross it and reverse its direction.",
+    "mechanics": [
+      "fall:O",
+      "push:O",
+      "push:C",
+      "splash:C"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "RLULUUU",
+        "maxStates": 200000,
+        "explanation": "Pushing the cork one square too far north traps it against the top wall; exhaustive search confirms no win."
+      }
+    ],
+    "actionBudget": 75,
+    "designer": "dd-r2"
+  },
+  "compact-between-floors-v1": {
+    "mapHash": "ff92999ca7e7a9f7c1d9a073229604be7078390038ded97a8684b2a6ee966872",
+    "solution": "DLDDRUDRRUULLUURUURRDRULLLDDR",
+    "plan": [
+      "Raise the arrow into the middle corridor and let it fly to the wall.",
+      "Circle beneath it and raise it again into the ball’s landing column.",
+      "Push the ball right off its upper shelf; it lands on the relocated arrow instead of falling too far.",
+      "Collect the chest and return to the exit, now screened from the spike by the ball."
+    ],
+    "insight": "An arrow moved twice becomes the shelf that catches a ball at exactly the height needed to protect the exit.",
+    "mechanics": [
+      "push:>",
+      "arrow:>",
+      "push:O",
+      "fall:O"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "DD",
+        "maxStates": 100000,
+        "explanation": "After this legal prefix, exhaustive continuation search finds no win (73 unique states; finite board has no growing plants or tools). Events: push:>, arrow:>, arrow:>."
+      }
+    ],
+    "actionBudget": 75,
+    "designer": "dc-r2"
+  },
+  "compact-make-room-to-leave-v1": {
+    "mapHash": "fcac7948ae2190ceaa486918a3c01a1fd467c3fef079718ef4e113734ddb2821",
+    "solution": "URUURRUDRDXUULDDDDUXRLDDRRR",
+    "plan": [
+      "Take the shears and cut the vine immediately left of the extinguisher.",
+      "Put the shears down where they can be recovered from the lower room.",
+      "Lift the extinguisher from under the ball, then leave sideways through the cut opening.",
+      "Extinguish the lower fire, exchange the extinguisher for the shears, and cut through to the stairs."
+    ],
+    "insight": "The extinguisher is a ball support: cut its escape route before picking it up, and leave the shears recoverable for the second gate.",
+    "mechanics": [
+      "pickup:S",
+      "tool:S",
+      "drop:S",
+      "pickup:K",
+      "fall:O",
+      "tool:K",
+      "drop:K"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "URUURRDXRUU",
+        "maxStates": 200000,
+        "explanation": "Picking up the extinguisher before cutting its side exit is exhaustively unsolvable."
+      }
+    ],
+    "actionBudget": 75,
+    "designer": "da-r1"
+  },
+  "compact-close-quarters-v1": {
+    "mapHash": "2fea5827c9ec1d9c52b5b628449cf773351f5aa58116cba29414f3ddabc32d58",
+    "solution": "DULDDRRDDLLULURRRRRRDRUURLDDDL",
+    "plan": [
+      "Lower the upper cork into the shared transfer row.",
+      "Move the lower cork down one square to free the pushing square beside the first.",
+      "Use the first cork to bridge the dividing hole.",
+      "Recover the parked cork upward, send it through the new bridge, and turn it upward into the final hole."
+    ],
+    "insight": "The second cork must first vacate the exact square needed to deliver the first, then return to use the bridge it helped create.",
+    "mechanics": [
+      "push:C",
+      "splash:C"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "RURRR",
+        "maxStates": 100000,
+        "explanation": "Actual-engine continuation exhausts 16 states without a win."
+      }
+    ],
+    "actionBudget": 75,
+    "designer": "de-r3"
+  },
+  "compact-late-checkout-v1": {
+    "mapHash": "d5209b0b2b48276bdcf3462b7dcadc905527098da313a1518e1c0a6fe9dae901",
+    "solution": "ULURDDDRRUDURURRLDLLDDDLDL",
+    "plan": [
+      "Release the arrow in its original lane, then push it down so the chest stops its flight.",
+      "Collect the chest and step downward to release the arrow into the ball’s column.",
+      "Approach beneath the ball, step sideways to let it land on the arrow, then push the ball left onto the neighboring shelf.",
+      "Push the arrow downward out of the way, then push the ball left again so it falls between the spike and the stairs.",
+      "Return through the room to the protected exit."
+    ],
+    "insight": "Collecting the chest is a timed release: the arrow must first reach the chest so it can become a landing shelf for the ball.",
+    "mechanics": [
+      "arrow:>",
+      "push:>",
+      "fall:O",
+      "push:O"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "ULURDDDRRUDURURL",
+        "maxStates": 100000,
+        "explanation": "After this legal prefix, exhaustive continuation search finds no win (145 unique states; finite board has no growing plants or tools). Events: fall:O."
+      }
+    ],
+    "actionBudget": 75,
+    "designer": "dc-r4"
+  },
+  "compact-temporary-custody-v1": {
+    "mapHash": "45ddc61cdecf4d4cce7dcc7fe58d18362137c731f3cbe928468780a0a9f9dd3b",
+    "solution": "RUUURRLXDLLUDUDRRURRLLDLXURRRRRR",
+    "plan": [
+      "Use the extinguisher on the first fire before exchanging it for the shears.",
+      "Park the extinguisher immediately to the right of the shears, where it will stop the released arrow.",
+      "Take the shears, retreat below, then push the arrested arrow upward into its alcove.",
+      "Cut the vine in the exit corridor, return for the extinguisher and put out the last fire."
+    ],
+    "insight": "The extinguisher must serve as the arrow’s temporary brake between its two trips to the fires.",
+    "mechanics": [
+      "pickup:K",
+      "tool:K",
+      "drop:K",
+      "pickup:S",
+      "arrow:>",
+      "push:>",
+      "tool:S",
+      "drop:S"
+    ],
+    "counterfactuals": [],
+    "actionBudget": 75,
+    "designer": "da-r3"
+  },
+  "compact-reservations-v1": {
+    "mapHash": "d13003166c5334cedd49f35b9def348ca80490619a3ad8d2013aa1e98c92bade",
+    "solution": "RULUXRUUULULULDLDDRDRRRRUURRR",
+    "plan": [
+      "Drop the axe into the spike lane and cross behind it.",
+      "Leave the upper chest in place until you have pushed the left arrow downward from above.",
+      "Collect that chest, then push the arrow down twice more to install a permanent spike shield.",
+      "Recover the axe, carve the tree and push its canoe up into the parking bay."
+    ],
+    "insight": "The tempting chest is holding the arrow in its useful lane; only the relocated arrow can make the axe safe to reclaim.",
+    "mechanics": [
+      "pickup:A",
+      "drop:A",
+      "push:<",
+      "arrow:<",
+      "tool:A",
+      "push:B"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "RULUXRUUULLLLUD",
+        "maxStates": 200000,
+        "explanation": "Taking the upper chest and retreating before lowering the arrow releases it into an irretrievable side cell; exhaustive search finds no win."
+      }
+    ],
+    "actionBudget": 75,
+    "designer": "da-r4"
+  },
+  "compact-out-of-line-v1": {
+    "mapHash": "04fd919b883474f3238a70d9466a17bb9995840a95dee38a0c14cbd7164aab9c",
+    "solution": "URDDLDDDDLLURDRUUURLUULURURDDDLDRRRDRULURRRLLDDR",
+    "plan": [
+      "Push the upper cork down to the bridge mouth.",
+      "Shift the lower cork right, then lift it above the transfer row; use the clear standing square to spend the first cork on the central hole.",
+      "Continue lifting the second cork into the top bay, shift it right, and lower it into the cleared bridge lane.",
+      "Send it across, lift it into the final hole’s row, then push it right to reach the chest and stairs."
+    ],
+    "insight": "The lower cork cannot simply turn right at the crossing: its needed standing square is inaccessible, so it must go up through the top bay and return down the adjacent lane.",
+    "mechanics": [
+      "push:C",
+      "splash:C"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "URRR",
+        "maxStates": 100000,
+        "explanation": "Actual-engine continuation exhausts 10 states without a win."
+      }
+    ],
+    "actionBudget": 75,
+    "designer": "de-r4"
+  },
+  "compact-switchyard-v1": {
+    "mapHash": "48e8688376f765530f666e35e90f0b2d20acb49b795eab3d828c0fb6416d6eae",
+    "solution": "LLLDDRULURRRDDRDDLUUURULLLDLLURRRRURRRRLLLDDDLDRRRR",
+    "plan": [
+      "Raise the left cork into the connecting lane and push it right to the upper turning square.",
+      "Go below the lower cork and push it up into that same lane.",
+      "Raise the first cork out of the lane, then send the second left into the vacated chamber.",
+      "Circle below the second cork and reverse it, sending it right into the lane you just cleared.",
+      "Use the first cork at the upper hole and collect the chest; then lower the second cork to the exit hole."
+    ],
+    "insight": "The lower cork must visit the other cork’s starting chamber and reverse direction before it can serve its nearby exit.",
+    "mechanics": [
+      "push:C",
+      "splash:C"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "DDD",
+        "maxStates": 200000,
+        "explanation": "Overcommitting a cork toward the lower wall makes the room unsolvable; exhaustive search exhausts 1291 states."
+      }
+    ],
+    "actionBudget": 75,
+    "designer": "dd-x2"
+  }
+}

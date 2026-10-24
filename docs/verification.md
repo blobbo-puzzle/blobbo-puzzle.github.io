@@ -1,5 +1,38 @@
 # Release verification
 
+## 0.8.0 — Expanded compact rooms and blind tournament
+
+README preview follow-up: the earlier sparse screenshots were replaced with **684 frames at 50 fps** (13.68 seconds, 1112 × 774, 274,451 bytes). Capture used the unchanged `animateTurn` function and browser canvas renderer with a deterministic 20 ms frame clock, preserving the game's 220 ms walk timing and all five walking poses; no interpolated frames were invented. Static window chrome was captured from the game CSS. Palette and delta-frame compression keep the GIF small. The 17 × 11 Palm Lake example replays to a legal win in 33 actions with both chests, no deaths and no blocked moves. The loop was reviewed at README display size. Its editor JSON is included under `maps/`, together with submission guidance; this demo is separate from the 34 built-in rooms.
+
+Follow-up: Second Floor now starts one tile below the spike line. Its initial puzzle state matches the original layout after Down; the updated 42-action reference and both wrong-order checks pass. The original tournament hashes and logs are retained, with the start revision recorded separately. All 229 tests still pass, and the revised room was completed in the browser in 42 moves. L now invokes fullscreen and the control reads “Full screen (L)” / “Exit full screen (L)”; typing L in the editor name remains ordinary text input. The in-app browser accepted fullscreen entry and changed the label, but does not retain fullscreen between automation interactions, as noted in the earlier fullscreen check. Audio remained off and no browser warnings or errors were recorded.
+
+Checked 24 October 2026. All **229 automated tests** pass. The shipped set contains **30 Regular and 4 Extra hard rooms**. Every winning reference and generator seeds 0–999 replay legally, with complete collection and no deaths or blocked actions. The first 11 Regular layouts and both existing Extra hard layouts retain their exact rows and save IDs. New Regular references take 9–51 actions, within footprints no larger than 13 × 10.
+
+Five gpt-6-astra/high designers produced the candidates; fresh gpt-6-luna/high players used a logged interface without keys or search. Each selected new Extra hard layout has three valid eight-minute/60-batch attempts, with at least two failures; combined result **6/6 unsolved**. Unsuccessful runs affected by an omitted rule and an early finish were excluded and rerun. The [tournament report](tournament-2026-10-24.md) retains those exclusions, all screening results, hashes, budgets and limitations. This does not estimate human solve rates.
+
+The pickup bubble now lasts two seconds and appears only twice per map. Unit and actual-browser checks cover independent map budgets, persistence across undo/restart/reload and changed editor layouts. The browser showed pickups one and two and stayed quiet on the third and after reload. The silent README GIF was recaptured from the actual game.
+
+Browser checks completed room 30 in 48 actions, and both finalist layouts through the editor in 43 and 103 actions with full animation. Room 30 fits a 390px-wide viewport; its directional buttons and undo work, and completion/selection persist after reload. Enter/Return was checked after an ordinary win, after the last built-in room, and after a successful editor playtest. It stays inactive during play and preserves native Enter activation on a focused button. The optional guide displays the rounded-object rule. Sound and music stayed off. The main standalone-game tab recorded no console warnings or errors. The iframe test harness emitted the known automation MutationObserver error; the game contains no MutationObserver code, and its visible layout and controls were checked successfully through native UI actions.
+
+The final website and source archives pass integrity and content-boundary checks, their SHA-256 checksums match, and a fresh source extraction rebuilds byte-identical standalone HTML without installing dependencies. Built-in solutions, tournament logs and walkthroughs are excluded from the website and standalone HTML. Physical-phone touch and browser-specific direct-file restrictions remain manual checks. No commit, push or deployment was performed.
+
+## 0.7.0 — Compact Regular rooms
+
+Checked 24 October 2026. All **186 automated tests** pass. The shipped set contains **11 new Regular rooms and 2 unchanged Extra hard rooms**. All 13 winning references and generator seeds 0–999 replay successfully. Regular witnesses take 16–34 actions in rooms no larger than 11 tiles on either axis. The old maps now serve only as historical engine regression fixtures.
+
+Six selected wrong-order branches are exhaustively unsolvable after the mistake; two constrained searches establish that key object uses cannot be bypassed. A capped search is never accepted as a proof. These checks establish mechanics and solvability, not a human difficulty ranking; the new Regular set has not been blind-tested. See [the current audit](level-audit.md).
+
+New stable IDs prevent old campaign completions from marking replacement layouts as solved. Existing Extra hard IDs and stored custom rooms are retained. Built-in solution strings and walkthroughs are outside both browser builds.
+
+Actual browser checks completed Borrowed Weight in 16 moves and The Green Jack in 18, exercised undo/restart and editor access, and verified Extra hard selection after reload. A representative old campaign save opens the new Regular set with no false completions and retains its custom room. The standalone HTML accepts moves and fits a 390px-wide frame. Sound and music remained off. No errors or warnings were recorded in the main game tab. Inspecting the narrow test iframe produced an automation MutationObserver error (the game does not use MutationObserver); its visible layout, movement and undo were subsequently checked through the UI. Physical-phone touch and direct-file browser restrictions remain manual checks.
+
+The release archives pass integrity and content-boundary checks, checksums match, and a fresh extraction of the source archive rebuilds byte-identical standalone HTML without installing dependencies.
+
+Every tool pickup now shows a five-second speech bubble naming the tool and explaining X to drop onto empty floor ahead; narrow/touch layouts also point to the gear-menu Drop control. Browser checks cover extinguisher, shears, axe, repeated pickup, dismissal after dropping and undo, automatic timeout, and phone-width placement. The 186-test suite still passes; the puzzle engine and maps are unchanged by this UI follow-up.
+
+The README preview is a silent capture of the actual browser game, cropped to its window. The earlier release records below describe checks at the time of those releases, not the current shipped room count or publication status.
+
+
 ## 0.6.2 — Upload folders and full screen
 
 Checked 24 October 2026. All **163 automated tests**, **48 authored solutions**, and **1,000 generator seeds** pass. Room layouts and puzzle rules are unchanged.

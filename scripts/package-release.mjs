@@ -12,7 +12,7 @@ const release = path.join(root, 'release');
 const hostFolder = path.join(release, 'upload-to-host');
 const githubFolder = path.join(release, 'upload-to-github');
 const stage = await mkdtemp(path.join(tmpdir(), 'blobbo-release-'));
-const sourceEntries = ['src', 'scripts', 'tests', 'docs', '.github', '.gitignore', 'package.json', 'README.md', 'LICENSE', 'CREDITS.md', 'CHANGELOG.md'];
+const sourceEntries = ['src', 'scripts', 'tests', 'docs', 'maps', '.github', '.gitignore', 'package.json', 'README.md', 'LICENSE', 'CREDITS.md', 'CHANGELOG.md'];
 async function zip(cwd, entries, filename) {
   const destination = path.join(release, filename);
   await rm(destination, { force: true });

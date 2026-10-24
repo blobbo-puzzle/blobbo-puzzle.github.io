@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
-import { LEVELS, CHAPTERS, PRACTICE_LEVELS, PRACTICE_CHAPTERS } from '../src/levels.js';
+import { LEVELS, CHAPTERS } from '../src/levels.js';
 import { CHALLENGE_LEVELS } from '../src/challenges.js';
 
 const project = fileURLToPath(new URL('../', import.meta.url));
@@ -38,19 +38,22 @@ test('the offline edition embeds its styles, icon, and runtime dependencies', ()
   assert.doesNotMatch(scripts[0][2], /\b(?:fetch|import)\s*\(|\bXMLHttpRequest\b|\bWebSocket\b/);
 });
 
-test('the offline edition includes the campaign and practice collections and their verified solutions', () => {
+test('offline edition includes exactly the Regular and Extra hard room collections', () => {
   const script = scripts[0][2];
-  for (const chapter of [...CHAPTERS, ...PRACTICE_CHAPTERS]) assert.ok(script.includes(chapter.name), `Missing chapter: ${chapter.name}`);
-  for (const level of [...LEVELS, ...PRACTICE_LEVELS]) {
-    assert.ok(script.includes(level.name), `Missing room: ${level.id}`);
-    assert.ok(script.includes(level.solution), `Missing saved solution: ${level.id}`);
-  }
+  for (const chapter of CHAPTERS) assert.ok(script.includes(chapter.name));
+  for (const level of [...LEVELS, ...CHALLENGE_LEVELS]) assert.ok(script.includes(level.name), `Missing room: ${level.id}`);
+  assert.match(html, /value="regular">Regular/);
+  assert.match(html, /value="challenge">Extra hard/);
+  assert.doesNotMatch(html, /value="(?:practice|campaign)"/);
+  assert.doesNotMatch(script, /Clockwise Clearing|PRACTICE_LEVELS|CAMPAIGN_ROOMS/);
 });
 
-test('challenge rooms are playable offline without bundling their private solution keys', async () => {
-  const keys=JSON.parse(await readFile(new URL('./fixtures/challenge-solutions.json',import.meta.url),'utf8'));
-  for(const level of CHALLENGE_LEVELS){
-    assert.ok(scripts[0][2].includes(level.name));
-    assert.ok(!scripts[0][2].includes(keys[level.id].solution),`Leaked challenge solution: ${level.id}`);
+test('all built-in solutions and walkthroughs stay outside the browser bundle', async () => {
+  for (const group of ['regular', 'challenge']) {
+    const keys = JSON.parse(await readFile(new URL(`./fixtures/${group}-solutions.json`, import.meta.url), 'utf8'));
+    for (const [id, key] of Object.entries(keys)) {
+      assert.ok(!scripts[0][2].includes(key.solution), `Leaked solution: ${id}`);
+      for (const line of key.plan) assert.ok(!scripts[0][2].includes(line), `Leaked walkthrough: ${id}`);
+    }
   }
 });

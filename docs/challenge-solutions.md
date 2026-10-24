@@ -1,10 +1,10 @@
-# Challenge solutions — spoilers
+# Extra hard solutions — spoilers
 
-Developer/playtester reference, excluded from the deployed site and standalone HTML. Each route is verified against the actual game engine by `npm run audit:levels`. These are winning witnesses, not guaranteed shortest routes. U/D/L/R move, W waits, X drops the held tool.
+Developer reference, excluded from the website and standalone HTML. U/D/L/R move, W waits, X drops the held tool. These are verified winning witnesses, not guaranteed shortest routes.
 
-## Secondhand Supports
+## 1. Secondhand Supports
 
-Stable ID: `challenge-a2`. 45 moves; 11 turns involving objects or hazards.
+Stable ID: `challenge-a2`. 15 × 13; 45 actions.
 
 1. Move the bottom ball left to enter the central workspace. Push the first marshmallow upward twice; vacating its former support area releases the ball at (7,7) into (7,8).
 2. Push the adjacent central marshmallow right to (8,6). Leave it there temporarily: the workspace must be entered from below now and crossed westward later. Do not clear space by shoving the eastern marshmallow into the lower arrow-release alcove.
@@ -24,9 +24,9 @@ LLUUUURDRRRDDUDDRRUULLUUUUUDLLULLRUDRDDDLLLLD
 
 </details>
 
-## The Last Cork
+## 2. The Last Cork
 
-Stable ID: `challenge-c`. 90 moves; 25 turns involving objects or hazards.
+Stable ID: `challenge-c`. 15 × 13; 90 actions.
 
 1. Raise the marshmallow only as far as (7,6), reserving it for permanent spike cover. Use the western loop to get above the southern cork.
 2. Lower the southern cork to row 9, get to its left, and commit it to the southeast hole. The left recess is an unrecoverable parking trap.
@@ -40,6 +40,45 @@ Stable ID: `challenge-c`. 90 moves; 25 turns involving objects or hazards.
 
 ```text
 UULLUURRRDDDLDRRRRRLLLLUUUURUULDRDLLLRRDDLUDLLUUURULLLLRRRRDDRDRUURULDDLLURRDRUUUUDDLDLLLL
+```
+
+</details>
+
+## 3. Second Floor
+
+Stable ID: `challenge-20261024-second-floor-v1`. 9 × 9; 42 actions.
+
+1. Reach the right side of the ball, push it left off its shelf, then push it left twice along the bottom row.
+2. Return through the middle to collect the chest, then stand just ahead of the arrow and step upward. The ball redirects the arrow diagonally into the next lane.
+3. Approach the ball from the left and shift it right one square; push the arrow up twice so it flies into the central shaft.
+4. Return below and push the ball farther right to reopen access beneath the arrow.
+5. Push the arrow up twice in the shaft to shield the spike beside the starting area, then loop above it to the exit.
+
+<details>
+<summary>Verified move sequence</summary>
+
+```text
+DDDDRRUULRDDLLLRUUULLDDLDUDRUUDDRRUUUULUUR
+```
+
+</details>
+
+## 4. The Third Hand
+
+Stable ID: `challenge-20261024-the-third-hand-v1`. 15 × 11; 103 actions.
+
+1. Park the axe in the spike lane to reach the upper room and take the shears.
+2. Cut the vine above the chest, then set the shears immediately left of that chest as an arrow catcher.
+3. Collect the chest and step below it; circle around and push the caught arrow downward three times to shield the spike.
+4. Recover the axe and clear the first tree, exchange for the shears to cut the middle vine, then recover the axe again.
+5. Carve the second tree, push its canoe right and then upward to open the final approach.
+6. Park the axe, return for the shears, and cut the last vine to collect the chest and reach the stairs.
+
+<details>
+<summary>Verified move sequence</summary>
+
+```text
+RULUXRUULUUUULLLDULDXRDDRRUUULLDDDDRRRDRRUULULDXULUUULLLDDRDRRRDRRRLLLUXDDURRRRRDRULLLLDUXLUUDDRRRRRRRD
 ```
 
 </details>

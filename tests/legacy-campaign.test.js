@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { LEVELS } from '../src/levels.js';
-import { CAMPAIGN_ORDER, LEGACY_CAMPAIGN_ORDER, campaignIndex } from '../src/campaign.js';
+import { LEVELS } from './fixtures/legacy-levels.js';
+import { CAMPAIGN_ORDER, LEGACY_CAMPAIGN_ORDER, campaignIndex } from './fixtures/legacy-campaign.js';
 import { auditLevel, replay, shortenWitness } from '../scripts/audit-levels.mjs';
 
 test('every old campaign room appears exactly once in the new order', () => {

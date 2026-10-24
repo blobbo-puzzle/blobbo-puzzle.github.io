@@ -121,3 +121,14 @@ a{color:#183d79}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 
 @media(pointer:coarse){.titlebar{height:53px}.death-controls button{min-height:44px;padding:4px 12px}}
+
+/* A brief, non-modal control reminder beside Blobbo, on the first two pickups in each map. */
+.pickup-hint{position:absolute;z-index:2;width:max-content;max-width:calc(100% - 12px);padding:7px 10px;border:1px solid #222;background:#ffffed;color:#222;box-shadow:2px 2px #0005;line-height:1.35;font-size:12px;pointer-events:none}
+.pickup-hint strong,.pickup-hint span,.pickup-hint small{display:block}
+.pickup-hint strong{font-size:12px;margin-bottom:2px}
+.pickup-hint small{font-size:10px;color:#555}
+.pickup-hint kbd{font:inherit;font-weight:bold;padding:0 3px;border:1px solid #777;background:#eee}
+.pickup-hint::after{content:"";position:absolute;left:var(--tail-x,20px);bottom:-5px;width:8px;height:8px;background:#ffffed;border-right:1px solid #222;border-bottom:1px solid #222;transform:translateX(-50%) rotate(45deg)}
+.pickup-hint[data-side="below"]::after{top:-5px;bottom:auto;transform:translateX(-50%) rotate(225deg)}
+.pickup-hint .pickup-touch{display:none}
+@media(pointer:coarse),(max-width:600px){.pickup-hint .pickup-touch{display:block;margin-top:3px}}

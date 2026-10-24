@@ -2,7 +2,7 @@
 
 The game is HTML, CSS, and JavaScript. It runs entirely in the player's browser with Canvas and Web Audio. There is no application server, database, account system, API key, or paid engine. Progress and user-created rooms are stored locally in that browser; use JSON export for portable room backups.
 
-The source is prepared for GitHub but has not been pushed or published. Rights remain reserved under the existing license.
+For local setup and build commands, see the [developer guide](development.md). Rights remain reserved under the existing license.
 
 ## Ready-to-upload folders
 
@@ -34,7 +34,7 @@ GitHub Pages serves static sites directly from a repository, supports project UR
 
 Subsequent pushes to `main` repeat verification and update the site automatically. Pull requests run the checks and produce downloadable artifacts but do not deploy. The workflow needs no personal access token: it uses GitHub's scoped workflow token. Details: [custom Pages workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
 
-All runtime paths are relative, so project-subdirectory hosting works. The full source, tests, research, and walkthroughs are excluded from the deployed site; authored level data and their reference solutions remain inspectable in client JavaScript, as in any client-side game.
+All runtime paths are relative, so project-subdirectory hosting works. The full source, tests, research, and walkthroughs are excluded from the deployed site; playable layouts remain inspectable in client JavaScript, as in any client-side game. Reference solutions and walkthroughs are kept in the source repository, outside the deployed browser assets.
 
 The `blobbo-release` artifact on each successful workflow contains both upload folders, offline HTML, ZIPs, instructions and checksums. The downloads can also be attached manually to a GitHub Release. The current reserved-rights license is preserved in both upload folders.
 

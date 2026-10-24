@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.8.0 — More rooms, fewer interruptions
+
+- Make the README player-facing; move local setup, release outputs and technical references into the developer guide.
+
+- Replace the README slideshow with a 50 fps animation of a larger, importable Palm Lake demo; preserve every walking pose and show trees, a canoe crossing, and a ball push.
+- Invite community map PRs through editor-exported JSON files, with an emphasis on compact Extra hard puzzles.
+
+- Move Second Floor’s starting position one tile below the spike line; preserve the remaining puzzle and update its verified route to 42 moves.
+- Add L to toggle full screen, with the shortcut shown on the menu button.
+
+- Limit pickup-control bubbles to two seconds and the first two pickups per map, remembered through undo, restart and reload.
+- Let Enter/Return continue after a win, open the room browser after the last room, or return an editor playtest to editing. Preserve native keyboard activation of focused controls.
+- Expand Regular to 30 rooms. Preserve the first 11, append 19 compact selections, and use larger later footprints where they support coupled decisions. New reference routes take 9–51 actions.
+- Add 2 Extra hard rooms from five independent designers and fresh cheaper blind players. The selected layouts defeated 6 of 6 valid attempts; each qualified with a majority of failures. Retain all outcomes, corrections and excluded runs in the tournament report.
+- Clarify rounded-object behavior in the optional field guide. Keep walkthroughs and solution keys outside browser assets.
+- Refresh the silent README GIF, audit walking as well as interactions, and regenerate the standalone HTML and upload packages.
+
+## 0.7.0 — Small rooms, bigger decisions
+
+- Show a brief speech bubble for every extinguisher, shears or axe pickup, explaining X to drop and the touch-menu alternative.
+
+- Replace the large campaign and gadget collections with 11 compact Regular rooms, 8–11 tiles on each axis. Verified winning routes take 16–34 actions. Preserve the two existing Extra hard rooms and their completion records.
+- Build puzzles around temporary supports, object reuse, delayed releases and restricted working space. Add six fully exhausted wrong-order branches and two checks for essential object interactions.
+- Give replacement layouts new save IDs. Keep old maps only as engine regression fixtures; exclude all built-in solution keys from browser assets.
+- Simplify collection selection to Regular / Extra hard. Preserve the focused window, editor, movement/death animations and audio controls.
+- Rewrite the README with an early play link and a silent gameplay GIF. Regenerate audited walkthroughs, offline HTML and upload packages.
+
+
 ## 0.6.2 — Upload folders and full screen
 
 - Add Full screen / Exit full screen to the gear menu, with an explanation when an embedded browser does not support it.

@@ -1,6 +1,7 @@
+import {generateLevel} from '../src/levels.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { PRACTICE_CHAPTERS as CHAPTERS, PRACTICE_LEVELS as LEVELS, CHAPTERS as CAMPAIGN_CHAPTERS, LEVELS as CAMPAIGN_LEVELS, generateLevel } from '../src/levels.js';
+import { PRACTICE_CHAPTERS as CHAPTERS, PRACTICE_LEVELS as LEVELS, CHAPTERS as CAMPAIGN_CHAPTERS, LEVELS as CAMPAIGN_LEVELS } from './fixtures/legacy-levels.js';
 import { createState, step, validateLevel, solveLevel, stateKey } from '../src/engine.js';
 
 function replay(level, actions = level.solution) {

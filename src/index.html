@@ -11,7 +11,7 @@
   <main id="game-stage" aria-label="Blobbo game">
     <section class="window" id="game-window" aria-label="Puzzle window">
       <div class="titlebar"><span class="window-box" aria-hidden="true"></span><span class="title-stripes" id="title-stripes" aria-hidden="true"></span><div id="death-controls" class="death-controls" aria-label="Try again" hidden><button id="death-undo">Undo <kbd>Z</kbd></button><button id="death-restart">Restart <kbd>R</kbd></button></div><span class="window-zoom" aria-hidden="true"></span></div>
-      <div class="board-surround" id="board-surround"><canvas id="board" width="544" height="416" tabindex="0" aria-label="Puzzle board. Arrow keys or swipe to move. Space waits, Z undoes, R restarts, X drops a tool. Open the gear for game controls."></canvas><div id="board-overlay" hidden></div></div>
+      <div class="board-surround" id="board-surround"><canvas id="board" width="544" height="416" tabindex="0" aria-label="Puzzle board. Arrow keys or swipe to move. Space waits, Z undoes, R restarts, X drops a tool. Open the gear for game controls."></canvas><div id="pickup-hint" class="pickup-hint" role="status" aria-live="polite" hidden><strong id="pickup-name"></strong><span>Press <kbd>X</kbd> to drop it.</span><small>Onto empty floor ahead.</small><small class="pickup-touch">Or choose Drop in the gear menu.</small></div><div id="board-overlay" hidden></div></div>
     </section>
   </main>
 
@@ -23,7 +23,7 @@
       <header class="menu-title"><strong>Blobbo</strong><button id="close-menu" aria-label="Close game menu">×</button></header>
       <div class="menu-content">
         <div class="mode-tabs" role="tablist" aria-label="Workspace"><button role="tab" id="play-tab" aria-selected="true">Play</button><button role="tab" id="editor-tab" aria-selected="false">Create</button></div>
-        <button id="fullscreen" class="wide-button fullscreen-button" aria-pressed="false">Full screen</button>
+        <button id="fullscreen" class="wide-button fullscreen-button" aria-pressed="false" aria-keyshortcuts="L">Full screen (L)</button>
         <div id="play-sidebar">
           <span id="room-number" class="room-number">ROOM 01</span><h1 id="room-name"></h1>
           <div class="stats"><div><span>Chests</span><strong id="chests-stat">0 / 0</strong></div><div><span>Moves</span><strong id="moves-stat">000</strong></div><span id="best-score"></span></div>
@@ -37,7 +37,7 @@
           <p class="keyboard-guide" id="keyboard-guide">Arrow keys / WASD · Swipe or drag to move</p>
         </div>
         <div id="room-picker" class="menu-section">
-          <label class="field-label" for="collection">Rooms <span id="progress-count">0 / —</span></label><select id="collection"><option value="campaign">The campaign</option><option value="practice">Practice the gadgets</option><option value="challenge">Extra hard challenges</option></select>
+          <label class="field-label" for="collection">Rooms <span id="progress-count">0 / —</span></label><select id="collection"><option value="regular">Regular</option><option value="challenge">Extra hard</option></select>
           <div id="room-grid" class="room-grid" aria-label="Choose a room"></div>
           <button class="wide-button" id="all-rooms">Browse rooms…</button>
         </div>

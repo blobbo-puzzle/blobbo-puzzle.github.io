@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
-import { LEVELS, CHAPTERS, PRACTICE_LEVELS, generateLevel } from '../src/levels.js';
+import { LEVELS, generateLevel } from '../src/levels.js';
 import { CHALLENGE_LEVELS } from '../src/challenges.js';
 import { createState, step, stateKey, validateLevel } from '../src/engine.js';
 
@@ -59,53 +59,43 @@ export function auditLevel(level, collection, shorten = false) {
   assert.equal(JSON.stringify(level), original, `${level.id}: replay changed the map`);
   const kinds = new Set(['push', 'fall', 'arrow', 'spike', 'grow', 'tool', 'drop', 'pickup', 'splash']);
   const activeTurns = result.states.slice(1).filter(s => s.events.some(e => kinds.has(e.type))).length;
+  let maxWalk = 0, walk = 0;
+  for (const state of result.states.slice(1)) {
+    walk = state.events.some(event => kinds.has(event.type)) ? 0 : walk + 1;
+    maxWalk = Math.max(maxWalk, walk);
+  }
   const mechanics = [...new Set(result.states.flatMap(s => s.events)
     .filter(e => kinds.has(e.type)).map(e => `${e.type}${e.tile ? ':' + e.tile : ''}`))].sort();
   return { id: level.id, name: level.name, collection, savedMoves: level.solution.length,
-    witnessMoves: witness.length, interactionTurns: activeTurns, chests: result.state.total,
+    witnessMoves: witness.length, interactionTurns: activeTurns, longestWalk: maxWalk, chests: result.state.total,
     mechanics, witness, solvable: true };
 }
 
 export async function runAudit({ generatedSeeds = 1000 } = {}) {
-  const plans = JSON.parse(await readFile(new URL('../docs/campaign-plans.json', import.meta.url), 'utf8'));
+  const regularKeys = JSON.parse(await readFile(new URL('../tests/fixtures/regular-solutions.json', import.meta.url), 'utf8'));
   const challengeKeys = JSON.parse(await readFile(new URL('../tests/fixtures/challenge-solutions.json', import.meta.url), 'utf8'));
-  const challenges = CHALLENGE_LEVELS.map(level => ({ ...level, solution: challengeKeys[level.id]?.solution }));
   const rooms = [];
-  for (const [collection, levels] of [['campaign', LEVELS], ['practice', PRACTICE_LEVELS], ['challenge', challenges]]) {
+  for (const [collection, levels, keys] of [['regular', LEVELS, regularKeys], ['challenge', CHALLENGE_LEVELS, challengeKeys]]) {
     for (const level of levels) {
-      const result = auditLevel(level, collection, collection !== 'practice');
-      if (collection === 'campaign') {
-        assert.ok(plans[level.id]?.length, `${level.id}: missing planning explanation`);
-        result.planSteps = plans[level.id].length;
-        result.chapter = level.chapter;
-      }
+      assert.ok(keys[level.id]?.plan?.length, `${level.id}: missing planning explanation`);
+      const result = auditLevel({...level, solution: keys[level.id].solution}, collection);
+      result.width = level.rows[0].length; result.height = level.rows.length;
       rooms.push(result);
-      console.log(`${collection} ${level.id}: ${result.savedMoves} → ${result.witnessMoves} moves; ${result.interactionTurns} interaction turns`);
+      console.log(`${collection} ${level.id}: ${result.witnessMoves} moves; ${result.interactionTurns} interaction turns`);
     }
   }
   for (let seed = 0; seed < generatedSeeds; seed++) auditLevel(generateLevel(seed), 'generated');
-  await mkdir(new URL('../reports/', import.meta.url), { recursive: true });
-  const average = (items, key) => Math.round(items.reduce((sum, item) => sum + item[key], 0) / items.length * 10) / 10;
-  const bands = CHAPTERS.map(chapter => {
-    const items = rooms.filter(room => room.chapter === chapter.id);
-    return { name: chapter.name, rooms: items.length, averageWitnessMoves: average(items, 'witnessMoves'),
-      averagePlanSteps: average(items, 'planSteps') };
-  });
-  const report = { schemaVersion: 1, method: 'Legal saved-solution replay plus cycle/chunk deletion; witnesses are upper bounds, not shortest paths.', bands,
-    generated: { seeds: generatedSeeds, first: 0, last: generatedSeeds - 1, allSolved: true }, rooms };
+  await mkdir(new URL('../reports/', import.meta.url), {recursive: true});
+  const wrongOrderChecks = [...Object.values(regularKeys), ...Object.values(challengeKeys)].flatMap(key => key.counterfactuals ?? []).filter(proof => proof.prefix && proof.maxStates).length;
+  const report = {schemaVersion: 3, method: 'Legal winning-route replay through the actual engine. Move counts are upper bounds, not difficulty scores.', generated: {seeds: generatedSeeds, first: 0, last: generatedSeeds - 1, allSolved: true}, rooms};
   await writeFile(new URL('../reports/level-audit.json', import.meta.url), JSON.stringify(report, null, 2) + '\n');
-  const campaign = rooms.filter(room => room.collection === 'campaign');
-  const practice = rooms.filter(room => room.collection === 'practice');
-  const challengeResults = rooms.filter(room => room.collection === 'challenge');
-  let markdown = `# Level audit\n\nGenerated by \`npm run audit:levels\`. All ${rooms.length} built-in maps have a legal winning route: ${campaign.length} campaign rooms and ${practice.length} practice/experimental rooms, and ${challengeResults.length} challenge rooms. Generator seeds 0–${generatedSeeds - 1} also pass. This proves the shipped layouts are solvable under this engine; arbitrary edited rooms still need playtesting.\n\n## What was checked\n\n- Validate each layout and replay every stored action through the actual engine. Reject death, blocked moves, incomplete collection, or an unfinished exit. Confirm replay leaves the original map unchanged.\n- Remove exact-state cycles and try deleting contiguous chunks from campaign routes. Replay every accepted shortcut. These witnesses are **upper bounds**, not globally shortest solutions; the audit does not rule out other, much shorter approaches.\n- The separate test suite exercises irreversible mistakes, remote locks, shared supports, tool exchanges, and specific object-role changes. Historical capped searches in map metadata are not treated as proofs of impossibility.\n- Keep all geometry and winning references intact. Reorder rooms into four bands; migrate old position-based saves to stable room IDs. Completion and best-score IDs are unchanged.\n\n## Difficulty progression\n\nThe previous order opened with a 160-move room and ended with a 90-move room. The new order introduces shorter plans first and ends with longer return trips and shared-object dependencies. Plan steps are manually authored explanations of distinct tasks, not an automated difficulty score. Their wording is not used to determine solvability.\n\n| Band | Rooms | Mean shortened winning route | Mean plan steps |\n| --- | ---: | ---: | ---: |\n${bands.map(b => `| ${b.name} | ${b.rooms} | ${b.averageWitnessMoves} | ${b.averagePlanSteps} |`).join('\n')}\n\nDifficulty is not strictly monotonic. “The travelling prop” is deliberately short but requires five connected role changes; water navigation in “Reed Channels” is less demanding conceptually than several shorter rooms. Move count measures execution length, and prose length depends on editorial choices. Blind human playtesting is still needed to establish how hard each room feels. We have strengthened the **ordering**, not claimed to prove that every later map is harder or added artificial walking.\n\n## Campaign\n\n“Interactions” counts turns with pushes, hazard movement, plant growth, pickups, drops, tool use, or sinking; walking and chest collection alone do not count. One interaction can trigger a long cascade, so this is descriptive, not a difficulty rating.\n\n| Room | Name | Saved moves | Shortened witness | Interactions | Plan steps |\n| --- | --- | ---: | ---: | ---: | ---: |\n${campaign.map((r, i) => `| ${i + 1} | ${r.name} | ${r.savedMoves} | ${r.witnessMoves} | ${r.interactionTurns} | ${r.planSteps} |`).join('\n')}\n\nThe solution explanations and move strings are in [solutions.md](solutions.md), which contains spoilers and is never served with the game. Machine-readable witnesses are generated in \`reports/level-audit.json\`.\n\n## Practice and experiments\n\n| ID | Room | Legal winning moves |\n| --- | --- | ---: |\n${practice.map(r => `| ${r.id} | ${r.name} | ${r.savedMoves} |`).join('\n')}\n\nThe last two practice maps explicitly use the prototype water-filling rule. Campaign rooms do not rely on that rule. The generated maps are connected mazes, not arbitrary gadget puzzles; testing ${generatedSeeds} seeds is sample coverage, not a proof of every possible seed.\n`;
-  if (challengeResults.length) markdown += `\n## Extra hard challenges\n\nAll contest rooms are 15 × 13. Keys and strategic explanations are kept outside the browser bundle. See [the blind contest results](challenge-contest.md) for the actual attempt limits and outcomes; failed bounded attempts do not prove universal difficulty.\n\n| Room | Verified route | Shortened witness | Interaction turns |\n| --- | ---: | ---: | ---: |\n${challengeResults.map(r => `| ${r.name} | ${r.savedMoves} | ${r.witnessMoves} | ${r.interactionTurns} |`).join('\n')}\n`;
-  const solutions = `# Campaign solutions — spoilers\n\nDeveloper/playtester reference, excluded from the deployed site. Generated by \`npm run audit:levels\` from \`campaign-plans.json\` and successful engine replays. The prose describes one plan; alternatives can be valid. U/D/L/R move, W waits, X drops the held tool. Shortened sequences below are legal winning witnesses, not guaranteed optimal routes.\n\n${campaign.map((room, i) => `## ${i + 1}. ${room.name}\n\nStable ID: \`${room.id}\`. ${room.witnessMoves} moves; ${room.planSteps} planning steps.\n\n${plans[room.id].map((step, n) => `${n + 1}. ${step}`).join('\n')}\n\n<details>\n<summary>Verified move sequence</summary>\n\n\`\`\`text\n${room.witness}\n\`\`\`\n\n</details>\n`).join('\n')}`;
-  await writeFile(new URL('../docs/level-audit.md', import.meta.url), markdown);
-  await writeFile(new URL('../docs/solutions.md', import.meta.url), solutions);
-  const challengeSolutions = `# Challenge solutions — spoilers\n\nDeveloper/playtester reference, excluded from the deployed site and standalone HTML. Each route is verified against the actual game engine by \`npm run audit:levels\`. These are winning witnesses, not guaranteed shortest routes. U/D/L/R move, W waits, X drops the held tool.\n\n${challengeResults.map(room => `## ${room.name}\n\nStable ID: \`${room.id}\`. ${room.witnessMoves} moves; ${room.interactionTurns} turns involving objects or hazards.\n\n${challengeKeys[room.id].plan.map((step, index) => `${index + 1}. ${step}`).join('\n')}\n\n<details>\n<summary>Verified move sequence</summary>\n\n\`\`\`text\n${room.witness}\n\`\`\`\n\n</details>\n`).join('\n')}`;
-  await writeFile(new URL('../docs/challenge-solutions.md', import.meta.url), challengeSolutions);
-  console.log(`PASS: ${rooms.length} authored rooms and ${generatedSeeds} generated seeds.`);
+  const table = entries => `| Room | Size | Winning actions | Interaction turns | Longest walk |\n| --- | --- | ---: | ---: | ---: |\n${entries.map(r=>`| ${r.name} | ${r.width} × ${r.height} | ${r.witnessMoves} | ${r.interactionTurns} | ${r.longestWalk} |`).join('\n')}`;
+  await writeFile(new URL('../docs/level-audit.md', import.meta.url), `# Level audit\n\nGenerated by \`npm run audit:levels\`. All **${rooms.length} shipped rooms** have legal winning routes: ${LEVELS.length} Regular and ${CHALLENGE_LEVELS.length} Extra hard. Generator seeds 0–${generatedSeeds - 1} also pass. Historical rooms in test fixtures are not counted as shipped content.\n\n## What the checks establish\n\nEach layout is validated and its complete winning route replayed through the actual engine. A blocked action, death, incomplete collection or unfinished exit fails the audit. Replay must not mutate the original layout.\n\nThe separate test suite exhausts the reachable state graph after ${wrongOrderChecks} selected irreversible mistakes. Search limits are treated as inconclusive, never as impossibility proofs. Two additional constrained searches check that temporary tool support and upper-ball relocation cannot simply be skipped. The recorded map hashes bind these checks to the shipped layouts.\n\nWinning routes are upper bounds. Their length and the number of interaction turns describe execution, not human difficulty. Interaction turns involve pushes, falls, arrows, plant growth, tool use, pickup/drop or sinking; a single turn may trigger several events. Longest walk is the longest consecutive run without one of those interactions in the reference route, including treasure collection and the final approach to the exit. It is a screening measure, not a difficulty score. The expanded Regular set has not undergone blind human difficulty testing. No room is advertised as unbeatable.\n\n## Regular\n\nThe first 11 compact rooms are preserved, followed by 19 selected additions from five independent designers. Larger footprints are used where they support coupled decisions; small layouts remain throughout the set. New stable IDs keep additions separate from existing completions. Existing Extra hard IDs, best scores and custom rooms are preserved. The original maps remain only as historical engine regression fixtures.\n\n${table(rooms.filter(r=>r.collection==='regular'))}\n\nDeveloper [walkthroughs](solutions.md) contain spoilers and are excluded from browser assets. These rooms were authored or selected from deterministic small-layout searches, inspected for object interactions, and verified against the engine. They are original layouts, not copies of Globbo maps.\n\n## Extra hard\n\nThe existing two contest-selected rooms are unchanged; see their [original contest report](challenge-contest.md). New selections come from the [five-designer tournament](tournament-2026-10-24.md), with three fresh blind attempts each. Second Floor now starts one square lower, in the exact puzzle state after its original forced opening move; the rest of its layout is unchanged. A regression check binds this revision to the frozen layout. A new Extra hard room must defeat at least two of those three bounded attempts and pass the design review. Agent timeouts do not establish human difficulty.\n\n${table(rooms.filter(r=>r.collection==='challenge'))}\n\n## Generator\n\nThe editor's generator still creates connected treasure mazes, not authored logic puzzles. Testing ${generatedSeeds} seeds is sample coverage, not a proof of every possible seed. Arbitrarily edited maps need their own playtesting.\n`);
+  for (const [collection, keys, filename, title] of [['regular', regularKeys, 'solutions.md', 'Regular'], ['challenge', challengeKeys, 'challenge-solutions.md', 'Extra hard']]) {
+    const text = `# ${title} solutions — spoilers\n\nDeveloper reference, excluded from the website and standalone HTML. U/D/L/R move, W waits, X drops the held tool. These are verified winning witnesses, not guaranteed shortest routes.\n\n` + rooms.filter(r=>r.collection===collection).map((r,i)=>`## ${i+1}. ${r.name}\n\nStable ID: \`${r.id}\`. ${r.width} × ${r.height}; ${r.witnessMoves} actions.\n\n${keys[r.id].plan.map((p,j)=>`${j+1}. ${p}`).join('\n')}\n\n<details>\n<summary>Verified move sequence</summary>\n\n\`\`\`text\n${r.witness}\n\`\`\`\n\n</details>\n`).join('\n');
+    await writeFile(new URL('../docs/'+filename, import.meta.url), text);
+  }
+  console.log(`PASS: ${rooms.length} shipped rooms and ${generatedSeeds} generated seeds.`);
   return report;
 }
-
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) await runAudit();

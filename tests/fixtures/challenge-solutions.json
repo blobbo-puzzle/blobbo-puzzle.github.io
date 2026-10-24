@@ -234,5 +234,76 @@
         "explanation": "After lowering the southern cork to the bottom row, parking it left at (5,9) appears to clear the shared passage. It can never return: walls prevent upward/downward pushes, and the required square (4,9) for pushing right is a dead-end pocket accessible only through the cork itself. Pushing farther left strands it at (4,9). This leaves at most two usable corks for three mandatory holes."
       }
     ]
+  },
+  "challenge-20261024-second-floor-v1": {
+    "mapHash": "42dd6f6a8ba734d9ddb9f31d0fdf8b8adeceef117d34310ed91d82ee70af3632",
+    "solution": "DDDDRRUULRDDLLLRUUULLDDLDUDRUUDDRRUUUULUUR",
+    "plan": [
+      "Reach the right side of the ball, push it left off its shelf, then push it left twice along the bottom row.",
+      "Return through the middle to collect the chest, then stand just ahead of the arrow and step upward. The ball redirects the arrow diagonally into the next lane.",
+      "Approach the ball from the left and shift it right one square; push the arrow up twice so it flies into the central shaft.",
+      "Return below and push the ball farther right to reopen access beneath the arrow.",
+      "Push the arrow up twice in the shaft to shield the spike beside the starting area, then loop above it to the exit."
+    ],
+    "insight": "A ball must first become an arrow-deflecting rounded obstacle, then move out of the way twice so the redirected arrow can climb to its final shielding role.",
+    "mechanics": [
+      "push:O",
+      "fall:O",
+      "arrow:>",
+      "push:>"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "DDR",
+        "maxStates": 100000,
+        "explanation": "After this legal prefix, exhaustive continuation search finds no win (76 unique states; finite board has no growing plants or tools). Events: push:O, fall:O, fall:O."
+      },
+      {
+        "prefix": "DDDDRRUULRDDLLLL",
+        "maxStates": 100000,
+        "explanation": "After this legal prefix, exhaustive continuation search finds no win (50 unique states; finite board has no growing plants or tools). Events: push:O."
+      }
+    ],
+    "actionBudget": 140,
+    "designer": "dc-x1",
+    "tournament": {
+      "packetId": "puzzle-1"
+    }
+  },
+  "challenge-20261024-the-third-hand-v1": {
+    "mapHash": "9fade4ec8def0e31d0d35776bd5e6c5bbb77aefcc512bcd4d6d050ab695085a6",
+    "solution": "RULUXRUULUUUULLLDULDXRDDRRUUULLDDDDRRRDRRUULULDXULUUULLLDDRDRRRDRRRLLLUXDDURRRRRDRULLLLDUXLUUDDRRRRRRRD",
+    "plan": [
+      "Park the axe in the spike lane to reach the upper room and take the shears.",
+      "Cut the vine above the chest, then set the shears immediately left of that chest as an arrow catcher.",
+      "Collect the chest and step below it; circle around and push the caught arrow downward three times to shield the spike.",
+      "Recover the axe and clear the first tree, exchange for the shears to cut the middle vine, then recover the axe again.",
+      "Carve the second tree, push its canoe right and then upward to open the final approach.",
+      "Park the axe, return for the shears, and cut the last vine to collect the chest and reach the stairs."
+    ],
+    "insight": "Neither tool can be abandoned as the final shield: the alternating gates force both tools to return, so the arrow must take over their shielding job.",
+    "mechanics": [
+      "pickup:A",
+      "drop:A",
+      "pickup:S",
+      "tool:S",
+      "drop:S",
+      "arrow:<",
+      "push:<",
+      "tool:A",
+      "push:B"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "RULUXRUUULUUDDLDXRDURRULLLDXRDRRRURLLULLLLUDDXRDURRRRRRRDRU",
+        "maxStates": 300000,
+        "explanation": "Execute the previously successful tool-handoff shortcut through its last legal action. With the shears abandoned as the innermost spike shield, the added final vine leaves no winning continuation; exhaustive search confirms failure."
+      }
+    ],
+    "actionBudget": 140,
+    "designer": "da-x2",
+    "tournament": {
+      "packetId": "puzzle-6"
+    }
   }
 }

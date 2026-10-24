@@ -1,5 +1,5 @@
-// Compact contest rooms. Keys belong in developer fixtures, not browser assets.
-export const CHALLENGE_CHAPTERS = [{id:"challenge-rooms",name:"The challenge rooms"}];
+// Extra hard rooms; solution keys and blind-play records are developer data only.
+export const CHALLENGE_CHAPTERS = [{id:'challenge-rooms',name:'Extra hard'}];
 export const CHALLENGE_LEVELS = [
   {
     "id": "challenge-a2",
@@ -38,6 +38,40 @@ export const CHALLENGE_LEVELS = [
       "####...@...h$##",
       "###############",
       "###############",
+      "###############"
+    ]
+  },
+  {
+    "id": "challenge-20261024-second-floor-v1",
+    "name": "Second Floor",
+    "chapter": "challenge-rooms",
+    "rows": [
+      "#########",
+      "#....E..#",
+      "#.#...!##",
+      "##...@#.#",
+      "#.....#.#",
+      "##..#.O.#",
+      "#.$.#.#.#",
+      "#>......#",
+      "#########"
+    ]
+  },
+  {
+    "id": "challenge-20261024-the-third-hand-v1",
+    "name": "The Third Hand",
+    "chapter": "challenge-rooms",
+    "rows": [
+      "###############",
+      "##.....########",
+      "##.p#.S########",
+      "##.$<..########",
+      "###......##.###",
+      "###.....TpT.p$#",
+      "##!......#..#E#",
+      "#####...#######",
+      "#####...#######",
+      "#####.@A#######",
       "###############"
     ]
   }
