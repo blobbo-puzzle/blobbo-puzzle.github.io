@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.1 — Mobile gadget controls
+
+- Add a 44px touch Drop button in the game frame while carrying a gadget, with its icon and drop direction. Keep it off the map, update mobile pickup reminders, and explain blocked drops without opening the menu.
+
 ## 0.8.0 — More rooms, fewer interruptions
 
 - Make the README player-facing; move local setup, release outputs and technical references into the developer guide.

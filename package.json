@@ -1,6 +1,6 @@
 {
   "name": "blobbo-browser-project",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "An independent, offline-capable Macintosh-inspired puzzle game for the browser.",
   "private": true,
   "type": "module",

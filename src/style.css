@@ -120,7 +120,7 @@ a{color:#183d79}
 @media(max-height:480px) and (min-width:600px){.game-menu{width:360px}.menu-content{padding:10px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 
-@media(pointer:coarse){.titlebar{height:53px}.death-controls button{min-height:44px;padding:4px 12px}}
+@media(any-pointer:coarse),(max-width:600px){.titlebar{height:53px}.death-controls button{min-height:44px;padding:4px 12px}}
 
 /* A brief, non-modal control reminder beside Blobbo, on the first two pickups in each map. */
 .pickup-hint{position:absolute;z-index:2;width:max-content;max-width:calc(100% - 12px);padding:7px 10px;border:1px solid #222;background:#ffffed;color:#222;box-shadow:2px 2px #0005;line-height:1.35;font-size:12px;pointer-events:none}
@@ -131,4 +131,12 @@ a{color:#183d79}
 .pickup-hint::after{content:"";position:absolute;left:var(--tail-x,20px);bottom:-5px;width:8px;height:8px;background:#ffffed;border-right:1px solid #222;border-bottom:1px solid #222;transform:translateX(-50%) rotate(45deg)}
 .pickup-hint[data-side="below"]::after{top:-5px;bottom:auto;transform:translateX(-50%) rotate(225deg)}
 .pickup-hint .pickup-touch{display:none}
-@media(pointer:coarse),(max-width:600px){.pickup-hint .pickup-touch{display:block;margin-top:3px}}
+@media(any-pointer:coarse),(max-width:600px){.pickup-hint .pickup-touch{display:block}.pickup-hint .pickup-keyboard{display:none}}
+.pickup-hint .pickup-action{display:inline;font:inherit;font-weight:bold;margin:0}
+
+/* Keep the touch drop action in the window frame, never over a puzzle square. */
+.touch-drop{display:none;flex-shrink:0;align-items:center;justify-content:center;gap:7px;min-width:112px;min-height:44px;padding:3px 9px;font-weight:bold;touch-action:manipulation}
+#touch-drop-icon{display:flex;align-items:center}
+#touch-drop-icon canvas{width:26px;height:26px;image-rendering:pixelated}
+#touch-drop-direction{font-size:20px;line-height:1}
+@media(any-pointer:coarse),(max-width:600px){.touch-drop{display:flex}.title-stripes{min-width:0}}

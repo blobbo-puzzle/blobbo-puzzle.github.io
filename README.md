@@ -27,8 +27,10 @@ Collect every chest, then take the stairs. Balls, arrows, vines and movable obje
 | Restart | R |
 | Continue after clearing a room | Enter / Return |
 | Toggle full screen | L |
-| Drop held tool | X, in the last movement direction |
+| Drop held tool | X, or tap **Drop** above the map on mobile |
 | Rooms, editor and settings | Gear menu |
+
+On mobile, the **Drop** button appears while you’re holding a gadget. Its arrow shows where it will land; the square ahead must be empty.
 
 Progress and custom rooms are saved in your browser. Use the editor's **Export** button to back up rooms or share them with someone else. Saves do not sync between devices or browsers.
 

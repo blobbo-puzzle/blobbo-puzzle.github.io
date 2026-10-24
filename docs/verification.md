@@ -1,5 +1,13 @@
 # Release verification
 
+## 0.8.1 — Mobile gadget controls
+
+Checked 24 October 2026. The new contextual Drop button uses the same `X` action as the keyboard; engine rules and room layouts are unchanged. It appears in the grey frame on touch-capable or narrow screens only while holding a tool, includes the gadget icon and facing arrow, and pauses activation during movement animation. A blocked drop produces a two-second message without consuming a turn. Pickup reminders keep their two-second, twice-per-map limit and use touch-specific instructions.
+
+Actual-browser checks at a 390px-wide viewport covered extinguisher, axe and shears pickup/drop, a blocked drop, swipe-driven direction changes, undo, restart, the third pickup remaining quiet, and hiding the control in the editor. The 844px mouse-layout check confirmed the control is hidden while keyboard X and undo still work. Audio remained off and no console warnings/errors were recorded. Physical-phone taps and landscape orientation remain manual device checks.
+
+All 229 automated tests, all 34 built-in winning routes and generator seeds 0–999 pass. Standalone HTML and release packages are rebuilt from the checked source. No commit, push or deployment was performed.
+
 ## 0.8.0 — Expanded compact rooms and blind tournament
 
 README preview follow-up: the earlier sparse screenshots were replaced with **684 frames at 50 fps** (13.68 seconds, 1112 × 774, 274,451 bytes). Capture used the unchanged `animateTurn` function and browser canvas renderer with a deterministic 20 ms frame clock, preserving the game's 220 ms walk timing and all five walking poses; no interpolated frames were invented. Static window chrome was captured from the game CSS. Palette and delta-frame compression keep the GIF small. The 17 × 11 Palm Lake example replays to a legal win in 33 actions with both chests, no deaths and no blocked moves. The loop was reviewed at README display size. Its editor JSON is included under `maps/`, together with submission guidance; this demo is separate from the 34 built-in rooms.
