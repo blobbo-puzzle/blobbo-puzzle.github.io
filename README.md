@@ -8,7 +8,7 @@ A compact puzzle game inspired by the classic Macintosh Blobbo. Collect the ches
 
 *Try the room in the preview: download [Palm Lake](maps/palm-lake.blobbo.json) as raw JSON, then choose **Gear → Create → Import**.*
 
-- **30 Regular and 4 Extra hard rooms.** Every room is available from the start. Pick one and explore at your own pace.
+- **30 Regular and 11 Extra hard rooms.** Every room is available from the start. Pick one and explore at your own pace.
 - **Unlimited undo.** Experiment freely, retrace your steps, and try another idea.
 - **A quiet game window.** The puzzle takes center stage; controls are tucked into the gear menu.
 - **Make your own rooms.** The built-in editor lets you create, test, save and share puzzles.

@@ -50,7 +50,7 @@ These paths are generated locally and ignored by Git. The Pages workflow also ma
 
 ## Puzzle verification
 
-Built-in solution keys are kept outside the browser assets. The [room audit](level-audit.md) explains what is verified and what still depends on human playtesting. The [five-designer tournament](tournament-2026-10-24.md) records how the two newest Extra hard rooms were selected, including the later starting-position correction.
+Built-in solution keys are kept outside the browser assets. The [room audit](level-audit.md) explains what is verified and what still depends on human playtesting. The [five-designer tournament](tournament-2026-10-24.md) records how Second Floor and The Third Hand were selected, including the later starting-position correction. The [second tournament](tournament-2026-10-30.md) records the seven Extra hard rooms added after them.
 
 Developer [Regular solutions](solutions.md) and [Extra hard solutions](challenge-solutions.md) contain spoilers. Keep solutions out of the playing interface and use them to verify complete, legal winning routes when changing a map.
 

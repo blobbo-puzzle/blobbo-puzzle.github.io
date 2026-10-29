@@ -305,5 +305,212 @@
     "tournament": {
       "packetId": "puzzle-6"
     }
+  },
+  "challenge-20261030-cellar-door-v1": {
+    "solution": "DDLULDUURRRRDULLDDLDDDD",
+    "mapHash": "62fe5c533098b085c47fe1cf3e43a9926cefaa25de337a7c77b9ea706805ce32",
+    "plan": [
+      "From (4,3) push the marshmallow left to (2,3), then from (2,2) push it down into (2,4). It screens the crossing (3,4) from the upper spike and sits directly above the ball at (2,5).",
+      "Go to (6,1), beside the ball at (7,1), and step down to (6,2). The ball drops one square onto the ball at (7,3); with Blobbo standing on its left it slides down-right into the shaft at column 8.",
+      "Falling past (8,5) it wakes the arrow at (9,5) (the only way to release it: (8,4) is beside the right spike and the lane can only be entered next to the ball at (2,5)). The arrow flies left along row 5; it cannot slide over the ball at (2,5) because the marshmallow is above it, so it slides under, into (2,6), where the lower spike stops it.",
+      "Walk (3,3), (3,4), (3,5), (3,6) down to the stairs at (3,7), screened from the upper spike by the marshmallow and from the lower spike by the arrow."
+    ],
+    "insight": "The arrow is sealed: it can only be released by a ball falling past its nose, and that ball goes the right way only if Blobbo blocks its default (down-left) slide with his own body. The marshmallow's placement at (2,4) does double duty: it shields the upper crossing and, by blocking the arrow's over-route, forces the arrow under the ball into the lower spike row as the second shield.",
+    "mechanics": [
+      "arrow:<",
+      "fall:O",
+      "push:M"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "RR",
+        "maxStates": 1000,
+        "explanation": "The earliest irreversible mistake found by exhaustive graph analysis: after these 2 actions, every position still reachable has been searched and none wins."
+      }
+    ],
+    "designer": {
+      "model": "claude-opus-5.5",
+      "effort": "max"
+    }
+  },
+  "challenge-20261030-the-doorman-v1": {
+    "solution": "ULLLLDLUUUDDRRRURRUUULLDRLDLRDDLLULUL",
+    "mapHash": "4e848103bbd21c87d62b7ad76db3837801b6055dbc6afffa93c0622e80354d7b",
+    "plan": [
+      "The stairs (1,4) sit directly below the spike (1,3), so they are unusable while it stays there. A spike only moves by charging, so it has to be baited.",
+      "Push the cork west along row 6 to (2,6), go below it and push it up three times: it plugs the hole (2,3) beside the spike. This deliberately opens the spike's view along row 3.",
+      "Leave both chests alone. Row 3 is now exposed except (7,3), which the chest at (6,3) still screens: cross upward there into the upper room.",
+      "Walk round to (5,2), right of the hanging ball, and step down into row 3. Leaving (5,2) drops the ball onto (4,3), where the pocket chest (4,4) holds it; the spike charges from (1,3) and stops at (3,3) against the ball.",
+      "With the ball screening row 3, collect the chest at (6,3). Return to (5,3), drop onto the one-way floor (5,4) and take the pocket chest (4,4); stepping back out lets the ball fall into the hole (4,5).",
+      "Leave the one-way floor downward and walk round the bottom to the stairs, which are now free."
+    ],
+    "insight": "The spike guarding the stairs must be relocated, and the only safe way is to bait it: step into its line at the moment the hanging ball drops between you and it, so its charge stops against the ball. That needs two counterintuitive preparations: plug the hole that protects you (it is all that hides you from the spike, and the only cork has to go there), and leave both chests in place because each is structural. The pocket chest is what stops the ball inside the spike's row; the row-3 chest is the only screen for the upward crossing once the line is open.",
+    "mechanics": [
+      "fall:O",
+      "push:C",
+      "spike:!",
+      "splash:C",
+      "splash:O"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "LLLU",
+        "maxStates": 1700,
+        "explanation": "The earliest irreversible mistake found by exhaustive graph analysis: after these 4 actions, every position still reachable has been searched and none wins."
+      }
+    ],
+    "designer": {
+      "model": "claude-opus-5.5",
+      "effort": "max"
+    }
+  },
+  "challenge-20261030-standoff-v1": {
+    "solution": "DDDDLURULLRUULDDDDLLLULUDRDDL",
+    "mapHash": "2d7753c67688544c2f35130d537f2f50f5b19181dbb2b44cfd9fb62400b3e5ed",
+    "plan": [
+      "The only chest (1,3) sits directly below the upper spike (1,2), so the spike must be moved. The stairs (1,6) are in the lower spike's row, so that row will need a screen too.",
+      "Go down the right side, push the cork up from (6,4) to (6,3), then west twice to (4,3): it now stands directly above the hole (4,4), not in it.",
+      "Walk round to (5,1), right of the hanging ball, and push the marshmallow down. You step into the upper spike's row, but leaving (5,1) drops the ball onto the cork at (4,2); the spike charges from (1,2) and stops at (3,2) against the ball.",
+      "Keep pushing the freed marshmallow down column 5 into the bottom row at (5,6), where it screens the stairs' row from the lower spike.",
+      "Walk west and up to the chest (1,3), which no longer touches a spike, then back down to the stairs."
+    ],
+    "insight": "The marshmallow is pinned: it is the upper spike's only screen, and every safe-looking push either keeps it in that row or exposes you. The one way to move it out is to push it down from beside the hanging ball, so the ball drops into the spike's row at the same moment and the spike's charge stops against it. That single move both baits the spike away from the chest and frees the marshmallow, which is then the only object that can screen the stairs. For the ball to stop in the spike's row the cork must stand above the hole as a support, not plug it.",
+    "mechanics": [
+      "fall:O",
+      "push:C",
+      "push:M",
+      "spike:!"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "LL",
+        "maxStates": 4500,
+        "explanation": "The earliest irreversible mistake found by exhaustive graph analysis: after these 2 actions, every position still reachable has been searched and none wins."
+      }
+    ],
+    "designer": {
+      "model": "claude-opus-5.5",
+      "effort": "max"
+    }
+  },
+  "challenge-20261030-the-lean-to-v1": {
+    "solution": "UURWDDRRRUDUULLUDLDLUUUUDLLU",
+    "mapHash": "daffd215968585eeb8cdd8f6edcc3fbc2c8d1401c2cea77e11c0d69e83200a1e",
+    "plan": [
+      "Climb to (5,4) in row 4 but no higher: every turn spent in the top row lets the vine at (1,2) grow toward (3,2), the stairs' only access square, and nothing will ever be able to wall it off in time.",
+      "Grow the row-4 vine from (1,4) until its tip is at (4,4), beside the gap: step right to (6,4) and wait exactly once (or stand at (5,4) and wait twice, where it stops by itself). Leave row 4 downward.",
+      "Walk to (9,6), step up to (9,5) under the arrow and back down. Leaving that square releases the arrow; it flies left and stops at (5,4), right in the gap, against the vine tip.",
+      "While the arrow sits at (5,4) it blocks the row-4 vine. Enter row 4 at (9,4), collect (7,3), and leave via (6,4)->(6,5)->(5,5).",
+      "Walk up into the arrow twice: the first push lifts it to (5,3), where a wall stops it; the second lifts it to (5,2), from where it flies left and stops at (2,2), walling off the stairs vine for good.",
+      "Climb into the top row, collect (5,1), walk to (3,2) and enter the stairs."
+    ],
+    "insight": "The vine at (1,2) needs only one or two turns of your presence in the top row to cover the stairs' access, and no object can be placed in its way by hand. The only possible wall is the arrow at the far end of row 4, lifted two rows through the one-square gap so that it flies along the top row into the vine. To lift it, it must first stop exactly under the gap, and the only thing that can stop it there is the other creeping vine in row 4, deliberately grown to exactly the square beside the gap. The arrow then has a second job: while it waits in the gap it is the row-4 vine's wall, which is the only time the row-4 chest can be fetched.",
+    "mechanics": [
+      "arrow:<",
+      "grow",
+      "push:<"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "UUUU",
+        "maxStates": 2900,
+        "explanation": "The earliest irreversible mistake found by exhaustive graph analysis: after these 4 actions, every position still reachable has been searched and none wins."
+      }
+    ],
+    "designer": {
+      "model": "claude-opus-5.5",
+      "effort": "max"
+    }
+  },
+  "challenge-20261030-top-shelf-v1": {
+    "solution": "RURDRUUUDDLLUDRRRRRUUULDULULLLDULLLDDD",
+    "mapHash": "08c4b34a01134b48735259e8bac555806c437129b898d14e8df5045637947ef0",
+    "plan": [
+      "The stairs (1,4) sit directly below the spike (1,3), so the spike must be lured along row 3. The near ball (3,2) would park it at (2,3), beside the stairs' only entrance (1,3), so the far ball (7,2) has to be the brake. It parks the spike at (6,3), and from there the spike would see up column 6 and cut row 1, your only way back west. So column 6 must be capped first.",
+      "Push the cork up one square to (4,4) only, which frees (4,5). From (4,5) push the marshmallow east to (6,5), go below it and push it up three times to (6,2). The last push puts you on (6,3), which is safe only while the pit is still open.",
+      "Now finish the cork: push it from (4,4) into the pit (4,3). The spike's view along row 3 is open, and only (9,3) is still screened, by the chest (8,3). Leave that chest alone.",
+      "Walk round to (9,5), up through (9,3) to (9,2), left to (8,2), and step down onto the chest (8,3). Collecting it is the lure: the far ball drops onto (7,3) and the spike charges from (1,3) and stops at (6,3).",
+      "Go back up and west along row 1; the marshmallow at (6,2) blocks the spike's view up column 6. Step into (4,2) and back out so the near ball drops onto (3,3), screening (1,3).",
+      "Walk to (1,1) and down through (1,2) and (1,3) onto the stairs."
+    ],
+    "insight": "Three decisions are coupled, and none of them shows its consequence until late. (1) Which ball: the near ball looks like the obvious brake but parks the spike next to the stairs' entrance; the far ball must be the brake, and the near ball becomes the stairs' screen afterwards. (2) Where the spike will park: at (6,3) it would see up column 6 and strand you east, so before luring you must cap that column with the marshmallow, and the only route to (6,2) runs through (6,3). (3) When to plug: plugging the pit is required for any lure, but it exposes (6,3). The cork must go up halfway to free the marshmallow, wait for the cap, and only then fill the pit. On top of that, the row-3 chest must stay put as the crossing's screen until it is collected as the lure step.",
+    "mechanics": [
+      "fall:O",
+      "push:C",
+      "push:M",
+      "spike:!",
+      "splash:C"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "RUU",
+        "maxStates": 89700,
+        "explanation": "The earliest irreversible mistake found by exhaustive graph analysis: after these 3 actions, every position still reachable has been searched and none wins."
+      }
+    ],
+    "designer": {
+      "model": "claude-opus-5.5",
+      "effort": "max"
+    }
+  },
+  "challenge-20261030-tenth-frame-v1": {
+    "solution": "LLRRDDDDLLLLLDRRURURDRDUUUUUR",
+    "mapHash": "b66147b4617860ebdf4b303cd587d0cdc1a2fc063459290fe93e99e23a0b51ef",
+    "plan": [
+      "Take the top chest (5,1) and step back right. The ball at (4,1) drops to (4,3); the right ramp at (4,4) would throw it down-right into (5,4), but the chest there jams the ramp, so the ball rests at (4,3) and screens the spike row (3).",
+      "Cross the spike row at (7,3), walk west along row 5 to (2,5) and step down to (2,6).",
+      "Push the marshmallow right twice, from (3,6) to (5,6). It will be the floor that stops the ball at (5,5).",
+      "Go back up to (4,5), (5,5) and take the jam chest (5,4) from below, then step right to (6,4). Unjammed, the ball rolls off the ramp through (5,4) and lands on the marshmallow at (5,5). The spike row is now open.",
+      "Go to (7,5) and take the chest (7,6) that was holding the arrow, then step out (up, or down to (7,7)). The arrow flies left, slides over the ball at (6,6) into row 5, slides over the fallen ball at (5,5) into (5,4), and the ramp lifts it up-left into (4,3), where the spike stops it: the new shield.",
+      "Climb back through (7,4), (7,3) to the stairs at (8,1)."
+    ],
+    "insight": "The shield that lets you down (the ball held on the ramp by the chest) is lost the moment you take that chest, and the only way back up is to make the arrow climb a staircase: the resting ball at (6,6), the fallen shield ball itself at (5,5), and finally the same ramp, which lifts the arrow into the exact square the ball vacated. This needs the marshmallow used as a floor (not a shield) so the ball stops one square higher than it naturally would, and the arrow released only after the ball has landed.",
+    "mechanics": [
+      "arrow:<",
+      "fall:O",
+      "push:M"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "LLRRDDDDD",
+        "maxStates": 800,
+        "explanation": "The earliest irreversible mistake found by exhaustive graph analysis: after these 9 actions, every position still reachable has been searched and none wins."
+      }
+    ],
+    "designer": {
+      "model": "claude-opus-5.5",
+      "effort": "max"
+    }
+  },
+  "challenge-20261030-greenhouse-aisle-v1": {
+    "solution": "RRRRUUUUULLWWLUDLLLLLLWWRRRURRUDDLLDDDDDL",
+    "mapHash": "65f8c9e82e7fd699e23e9e534e3f76b8ae3940ea220cc96ebbaca1ed7f44b15f",
+    "plan": [
+      "Walk right along the bottom and climb the far-right shaft (12,7)->(12,3). This must be your first entry into the aisle (row 3): any step into row 3 from the left shaft lets the left-pointing vine at (13,3) grow into (12,3) and seal the right shaft for good.",
+      "Step left twice to (10,3), under the right ball. The right vine follows to (11,3) and stops, adjacent. Wait twice: the shaft vine at (10,7) climbs to (10,4).",
+      "Step left to (9,3): the ball drops into (10,3), lands on the shaft vine's tip and permanently walls off the right vine. Collect the chest at (9,2) (safe now that its ball has dropped).",
+      "Walk left to the axe at (3,3). Picking it up removes the only thing blocking the left vine, which grows to (2,3). Wait twice so the shaft vine at (3,7) climbs to (3,4), then step right: the left ball drops onto the axe's old square and replaces the axe as the left vine's wall.",
+      "Climb to (6,2), chop the palm at (7,2), push the canoe to (8,2) and collect (7,1).",
+      "Return to (5,3), descend the left shaft and step onto the stairs at (4,8)."
+    ],
+    "insight": "The two hanging balls are the only permanent walls against the two creeping vines in the aisle, but only if they land in the aisle itself. Each needs its shaft vine coaxed up to just below the aisle by waiting underneath the ball; then a sideways step drops the ball before the creeper can move into the vacated square. The axe lying under the left ball is what currently keeps the left vine dormant, so it may only be taken as a swap for that ball. The right ball must be dropped first and can only be reached in time from the right shaft; one careless step into the aisle from the left shaft (the natural first move) silently lets the right vine grow into the right shaft's top square, after which the right vine can never be stopped.",
+    "mechanics": [
+      "fall:O",
+      "grow",
+      "pickup:A",
+      "push:B",
+      "tool:A"
+    ],
+    "counterfactuals": [
+      {
+        "prefix": "LLLUUUUU",
+        "maxStates": 3000,
+        "explanation": "The earliest irreversible mistake found by exhaustive graph analysis: after these 8 actions, every position still reachable has been searched and none wins."
+      }
+    ],
+    "designer": {
+      "model": "claude-opus-5.5",
+      "effort": "max"
+    }
   }
 }

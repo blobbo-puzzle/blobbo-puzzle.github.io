@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased — Seven more Extra hard rooms
+
+- Add 7 Extra hard rooms from a second design tournament: Cellar Door, The Doorman, Standoff, The Lean-To, Top Shelf, Tenth Frame and Greenhouse Aisle. Each reference route equals the shortest winning route found by exhaustive search; each room also gets one exhausted wrong-order check. Every room played blind was solved by at least one agent player, so selection rests on maintainer playtesting; all outcomes are kept in the tournament report.
+- Explain in the field guide that vines grow one square per turn, including while you wait, and that vines in all four directions behave alike.
+
 ## 0.8.2 — Persistent creator palette
 
 - Keep the Create panel open while placing and painting tiles, with a dedicated sidebar on larger screens and a panel below the map on narrow screens. Return to the normal hidden controls when playing or testing a room.
